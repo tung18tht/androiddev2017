@@ -1,19 +1,14 @@
-USTH ICT 2017 Android Development
+USTH ICT 2017 Android Development - Group 5
 =====================================
-
-Students are expected to:
-* Fork this repository to your github account
-* Create new project with Android Studio / Eclipse ADT
-* Append name (and purpose) of your project to this README file
-* Push your commits regularly, with **proper** commit messages
-
 
 Member list
 =====================================
 
-*Add student list of your group here*
+* Nguyen Duc Tung - USTHBI5-146
+* Dang Vu Lam - USTHBI4-078
+* Do Dang Ngoc Kha - USTHBI5-061
 
 Project description
 =====================================
 
-*Add your project description here*
+* Online music player
