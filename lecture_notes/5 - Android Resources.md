@@ -10,19 +10,20 @@
 Learn about different resources, how to use them in an Android application
 
 #### Basic concepts:
+
 * Resources are things embedded (bundled) into the app
 * Stored in `res/` directory
 * Accessible through code: `R.<category>.<resourceName>`
 
-1. Layouts
+## I. Layouts
 
-*Definition:*
+**Definition:**
 
 * ViewGroup is the base View class for layouting in Android • Layout is a way to organise Views
 * Can be created by code or XML files in res/layout
 * Has hierarchical structure and can be nested
 
-*Layout XML:*
+**Layout XML:**
 
 * Containers (ViewGroups) contain Views, required layout_width, layout_height
 * Adaptive Layout: Use different layout XMLs in different directories
@@ -47,7 +48,7 @@ public View onCreateView(LayoutInflater inflater,
 }
 ```
 
-*Popular Layout classes:*
+**Popular Layout classes:**
 
 * FrameLayout
   * Can contain multiple children (Views)
