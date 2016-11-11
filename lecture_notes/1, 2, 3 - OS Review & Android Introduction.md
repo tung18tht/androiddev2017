@@ -5,11 +5,11 @@
 * Dang Vu Lam - USTHBI4 - 078
 * Do Dang Ngoc Kha - USTHBI5 - 061
 
-1. Chapter Objectives
+# 1. Chapter Objectives
 
 Go through the basic knowledge of operating system and get to know the basic concepts of Android.
 
-2. Operating System
+# 2. Operating System
 
 * Definition
   * A software that controls hardware and manages software. 
@@ -19,7 +19,7 @@ Go through the basic knowledge of operating system and get to know the basic con
   * Kernel determines which programs get access to which hardware resources.
   * The operating system provides an interface between an application program and the computer hardware.
 
-3. Android
+# 3. Android
 
 * Definition
   * A Mobile Operating System.
