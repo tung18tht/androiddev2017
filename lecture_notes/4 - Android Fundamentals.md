@@ -5,34 +5,33 @@
 * Dang Vu Lam - USTHBI4 - 078
 * Do Dang Ngoc Kha - USTHBI5 - 061
 
-1. Chapter Objectives
+## I. Chapter Objectives
 
-Introduction to the architecture of Android, the MVC model and compilation in Android programming.
+* Introduction to the architecture of Android, the MVC model and compilation in Android programming.
 
-2. Architecture
+## II. Architecture
 
-Four main layers:
+* Four main layers:
 
-* Applications: written in Java, main focus for the course. Example: weather, contacts, phone, browsers, etc.
-* Application Framework: higher level, also in Java, UI, Location Service, Notification, etc.
-* Libraries: mainly in C, C++, low level.
-* Linux Kernel: well-shaped, secured, active development.
+  * Applications: written in Java, main focus for the course. Example: weather, contacts, phone, browsers, etc.
+  * Application Framework: higher level, also in Java, UI, Location Service, Notification, etc.
+  * Libraries: mainly in C, C++, low level.
+  * Linux Kernel: well-shaped, secured, active development.
 
-3. Compilation
+## III. Compilation
 
 * Java compiler: compile once, run on multiple platforms.
 * Android Virtual Machines
   * Dalvik: the runtime, bytecode, and VM used by the Android system for running Android applications.
   * ART (Android RunTime): next version of Dalvik, faster, improved Garbage Collection (GC), first introduced in Android KitKat.
 
-4. MVC Model
+## IV. MVC Model
 
 * Model: manages behavior and data.
 * View: manages the display of information.
-* Controller: controls the data flow into model object and updates the
-view whenever data changes.
+* Controller: controls the data flow into model object and updates the view whenever data changes.
 
-5. Controllers
+## V. Controllers
 
 * Context
   * Central command center.
@@ -52,17 +51,17 @@ view whenever data changes.
   * Handles display of single screen.
 
 * Activity lifecycle
-  * onCreate() : initialization.
-  * onStart(): visible state.
-  * onPause(): Stop animation or heavy tasks, save unsaved changes.
-  * onResume(): Called when activity comes to foreground.
+  * `onCreate()`: initialization.
+  * `onStart()`: visible state.
+  * `onPause()`: Stop animation or heavy tasks, save unsaved changes.
+  * `onResume()`: Called when activity comes to foreground.
   * Screen orientation
-    * onSaveInstanceState()
-    * onDestroy()
+    * `onSaveInstanceState()`
+    * `onDestroy()`
   * New activity instance
-    * onCreate()
-    * onRestoreInstanceState()
-  * Close current activity: finish()
+    * `onCreate()`
+    * `onRestoreInstanceState()`
+  * Close current activity: `finish()`
   * Intent: used to move from one activity to another.
 
 * Fragment
@@ -72,7 +71,8 @@ view whenever data changes.
   * Officially supported from Honeycomb [API 11].
   * Similar lifecycle as Activity.
 
-6. View
+## VI. View
+
 * Interact with user
 * Building blocks for User Interface
 * XML or dynamic code
