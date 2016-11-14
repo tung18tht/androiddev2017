@@ -70,7 +70,7 @@ public View onCreateView(LayoutInflater inflater,
 
 * Each tab is a fragment
   * Can be nested
-  * *Off screen* limit: protect resources
+  * "*Off screen*" limit: protect resources
 
 * Adapter
   * Specify what fragment in what page
@@ -115,13 +115,14 @@ public View onCreateView(LayoutInflater inflater,
   pager.setAdapter(adapter);
   ```
 
-* `TabLayout`
-  * `build.gradle` of the app:
-  `compile "com.android.support:design:23.1.0"`
+* TabLayout
+  * `build.gradle` of the app: `compile "com.android.support:design:23.1.0"`
 
-  * In Activity or Fragment: setup a link between them
-  `tabLayout.setupWithViewPager(pager);`
+  * In Activity or Fragment: setup a link between them: `tabLayout.setupWithViewPager(pager);`
 
-2. Values
+## II. Values
 
-3. Drawables
+* Why?
+  * Central point of all "*constants*"
+  * Themeable
+  * i18n (internationalization)
