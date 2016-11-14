@@ -62,7 +62,7 @@ public View onCreateView(LayoutInflater inflater,
   * Multiple layers, z-based order
   * Relativity of children’s position and size to parent or others
 
-*ViewPager*
+**ViewPager**
 
 * Tab-like container, horizontal swipe scrolling gesture
 
@@ -70,9 +70,9 @@ public View onCreateView(LayoutInflater inflater,
 
 * Each tab is a fragment
   * Can be nested
-  * **Off screen** limit: protect resources
+  * *Off screen* limit: protect resources
 
-* `Adapter`
+* Adapter
   * Specify what fragment in what page
 
   ```java
@@ -109,7 +109,7 @@ public View onCreateView(LayoutInflater inflater,
   }
   ```
 
-  * Setup `ViewPager` in Activity's `onCreate()`
+  * Setup ViewPager in Activity's onCreate()
   ```java
   PagerAdapter adapter = new HomeFragmentPagerAdapter( getSupportFragmentManager());
   pager.setAdapter(adapter);
@@ -117,10 +117,10 @@ public View onCreateView(LayoutInflater inflater,
 
 * `TabLayout`
   * `build.gradle` of the app:
-  ```compile "com.android.support:design:23.1.0"```
+  `compile "com.android.support:design:23.1.0"`
 
   * In Activity or Fragment: setup a link between them
-  ```tabLayout.setupWithViewPager(pager);```
+  `tabLayout.setupWithViewPager(pager);`
 
 2. Values
 
