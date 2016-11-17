@@ -126,3 +126,42 @@ public View onCreateView(LayoutInflater inflater,
   * Central point of all "*constants*"
   * Themeable
   * i18n (internationalization)
+  
+## III. Drawables
+
+* 2 types:
+    * XML drawables: res/drawable
+    * Bitmap drawables (PNG/JPEG): res/drawable-*dpi
+* ImageView: src=“@drawable/name”
+* View: background=“@drawable/name”
+* 9patch: Transparency,stretch certain part of the image,padding.
+    *  Top & Left edges
+        * Black pixels deﬁne stretching area  
+    *  Bottom & Right edges
+        * Black pixels deﬁne paddings  
+    *  Can be editted with many image tools
+
+## IV. Raw
+
+* Embedded in your apps
+* Anything not common types 
+    * XMLs
+    * Drawables
+* Examples: fonts, mp3, html, css, js, etc.
+* Stored in 2 different places: 
+    * res/raw/
+        * A resource
+        * Accessible with **Context.getRessources()** 
+        * **R.raw.<name>**
+    * assets/
+        *  No resource, no **R.<assets>** 
+        *  Name it whatever you like
+        *  Use input stream to access binary data
+        *  Use ﬁle name with Context.getAssets()
+
+## V. Menu
+* Why?
+    * Common controls
+    * Less crammed components
+    * Consistent user experience
+* Common types: App Bar, Context Menu, Popup Menu
