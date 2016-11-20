@@ -1,0 +1,14 @@
+<tabs>
+    <tab
+            id="@+id/tab_home"
+            icon="@drawable/ic_bottom_home"
+            title="Home" />
+    <tab
+            id="@+id/tab_playing"
+            icon="@drawable/ic_bottom_playing"
+            title="Playing" />
+    <tab
+            id="@+id/tab_download"
+            icon="@drawable/ic_bottom_download"
+            title="Download" />
+</tabs>
