@@ -13,10 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
-
 import vn.edu.usth.musicplayer.Model.Playlist;
 import vn.edu.usth.musicplayer.Model.SongItem;
 import vn.edu.usth.musicplayer.fragment.DownloadFragment;
@@ -29,8 +27,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
-    Playlist pl;
-    ListView l;
+    Playlist playlist;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,17 +54,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //create playlist
-        pl = new Playlist("default");
+        playlist = new Playlist("default");
 
         if (copyMusicToSdCard()) {
-            playMusic(pl.getSong(1).getUrl());
+            playMusic(playlist.getSong(1).getUrl());
         }
 
         //ListView
+        ListView listView;
         String[] music = {"Songs", "Albums", "Artists", "Playlist"};
-        l = (ListView) findViewById(R.id.listView);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, music);
-        l.setAdapter(adapter);
+        listView = (ListView) findViewById(R.id.listView);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, music);
+        listView.setAdapter(adapter);
         
         Log.i("status", "Main Activity created");
     }
@@ -105,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 is.close();
                 fos.close();
                 SongItem si = new SongItem(file);
-                pl.addSong(si);
+                playlist.addSong(si);
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -54,7 +54,7 @@
             android:layout_marginLeft="-50dp"
             android:layout_width="340dp"
             android:layout_height="2dp"
-            android:background="@android:color/black"></View>
+            android:background="@android:color/black"/>
 
     </LinearLayout>
 
