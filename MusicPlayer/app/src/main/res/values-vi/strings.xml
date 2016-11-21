@@ -9,4 +9,6 @@
     <string name="playing">Đang chạy</string>
     <string name="playlist">Playlist</string>
     <string name="songs">Bài hát</string>
+    <string name="downloaded">Đã tải</string>
+    <string name="downloading">Đang tải</string>
 </resources>

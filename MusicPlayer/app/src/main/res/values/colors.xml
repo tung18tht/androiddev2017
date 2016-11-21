@@ -11,4 +11,5 @@
     <color name="accentDarkPlayingColor">#00C853</color>
 
     <color name="downloadColor">#009688</color>
+    <color name="downloadColorDark">#007668</color>
 </resources>

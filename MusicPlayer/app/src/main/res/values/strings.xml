@@ -6,6 +6,8 @@
     <string name="download">Download</string>
 
     <string name="categories">Categories</string>
+    <string name="downloading">Downloading</string>
+    <string name="downloaded">Downloaded</string>
     <string name="songs">Songs</string>
     <string name="albums">Albums</string>
     <string name="artists">Artists</string>
