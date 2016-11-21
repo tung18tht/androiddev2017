@@ -1,5 +1,6 @@
-<FrameLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -7,9 +8,154 @@
         android:background="@color/playingColor"
         tools:context="vn.edu.usth.musicplayer.fragment.PlayingFragment">
 
-    <TextView
+    <android.support.percent.PercentRelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Playing Fragment"/>
+            android:layout_height="wrap_content"
+            android:id="@+id/albumImagePlaceholder">
+        <ImageView
+                android:id="@+id/albumImage"
+                app:layout_widthPercent="100%"
+                app:layout_aspectRatio="100%"
+                android:src="@drawable/album"/>
+    </android.support.percent.PercentRelativeLayout>
 
-</FrameLayout>
+    <ImageButton
+            android:id="@+id/playlistButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/round_button"
+            android:src="@drawable/ic_playlist"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/albumImagePlaceholder"
+            android:layout_marginTop="-30dp"
+            android:layout_marginRight="20dp"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:orientation="vertical">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textColor="#FFF"
+                android:textSize="20dp"
+                android:text="Lost Stars"
+        />
+
+        <Space android:layout_width="match_parent" android:layout_height="10dp"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textColor="#FFF"
+                android:text="Adam Levine"/>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFF"
+                    android:layout_alignParentLeft="true"
+                    android:text="V (Limited Deluxe Edititon)"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFF"
+                    android:layout_alignParentRight="true"
+                    android:text="2/4"/>
+
+        </RelativeLayout>
+
+        <Space android:layout_width="match_parent" android:layout_height="10dp"/>
+
+        <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="-16dp"
+                android:layout_marginRight="-16dp"
+                android:thumbTint="@color/accentPlayingColor"
+                android:progress="28"
+                android:progressTint="@color/accentPlayingColor"
+                android:secondaryProgress="60"
+                android:secondaryProgressTint="@color/accentPlayingColor"/>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFF"
+                    android:layout_alignParentLeft="true"
+                    android:text="01:16"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFF"
+                    android:layout_alignParentRight="true"
+                    android:text="04:31"/>
+
+        </RelativeLayout>
+        
+        <Space android:layout_width="match_parent" android:layout_height="10dp"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+            <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:src="@drawable/ic_shuffle"/>
+
+            <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:src="@drawable/ic_previous"/>
+
+            <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:src="@drawable/ic_pause"/>
+
+            <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:src="@drawable/ic_next"/>
+
+            <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:src="@drawable/ic_loop"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
