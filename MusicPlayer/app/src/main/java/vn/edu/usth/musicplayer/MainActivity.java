@@ -11,8 +11,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 import vn.edu.usth.musicplayer.Model.Playlist;
@@ -53,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        
         //create playlist
         playlist = new Playlist("default");
 
@@ -60,13 +59,6 @@ public class MainActivity extends AppCompatActivity {
             playMusic(playlist.getSong(1).getUrl());
         }
 
-        //ListView
-        ListView listView;
-        String[] music = {"Songs", "Albums", "Artists", "Playlist"};
-        listView = (ListView) findViewById(R.id.listView);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, music);
-        listView.setAdapter(adapter);
-        
         Log.i("status", "Main Activity created");
     }
     
