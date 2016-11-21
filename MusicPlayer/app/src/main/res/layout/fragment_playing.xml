@@ -4,6 +4,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/playingFragment"
+        android:background="@color/playingColor"
         tools:context="vn.edu.usth.musicplayer.fragment.PlayingFragment">
 
     <TextView

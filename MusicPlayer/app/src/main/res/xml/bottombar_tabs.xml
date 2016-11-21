@@ -3,15 +3,15 @@
             id="@+id/tab_home"
             icon="@drawable/ic_bottom_home"
             title="@string/home"
-            barColorWhenSelected="#795548"/>
+            barColorWhenSelected="@color/homeColor"/>
     <tab
             id="@+id/tab_playing"
             icon="@drawable/ic_bottom_playing"
             title="@string/playing"
-            barColorWhenSelected="#673AB7"/>
+            barColorWhenSelected="@color/playingColor"/>
     <tab
             id="@+id/tab_download"
             icon="@drawable/ic_bottom_download"
             title="@string/download"
-            barColorWhenSelected="#009688"/>
+            barColorWhenSelected="@color/downloadColor"/>
 </tabs>
