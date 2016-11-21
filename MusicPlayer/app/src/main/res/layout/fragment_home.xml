@@ -6,9 +6,62 @@
         android:id="@+id/homeFragment"
         tools:context="vn.edu.usth.musicplayer.fragment.HomeFragment">
 
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Home Fragment"/>
+    <LinearLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="vertical"
+        android:background="#fa4602">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="8dp"
+            android:text="Music Library"
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            android:fontFamily="sans-serif"
+            android:textColor="@android:color/background_light" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="8dp"
+            android:text="4 songs"
+            android:fontFamily="sans-serif"
+            android:textColor="@android:color/background_light"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mainContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="65dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="Music"
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            android:fontFamily="sans-serif"/>
+
+        <View
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="-50dp"
+            android:layout_width="340dp"
+            android:layout_height="2dp"
+            android:background="@android:color/black"></View>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginTop="100dp"/>
 
 </FrameLayout>
