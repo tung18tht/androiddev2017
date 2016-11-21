@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Music Player</string>
+    <string name="albums">Album</string>
+    <string name="artists">Nghệ sĩ</string>
+    <string name="categories">Các mục</string>
+    <string name="download">Tải về</string>
+    <string name="favorites">Yêu thích</string>
+    <string name="playing">Đang chạy</string>
+    <string name="playlist">Playlist</string>
+    <string name="songs">Bài hát</string>
+</resources>
