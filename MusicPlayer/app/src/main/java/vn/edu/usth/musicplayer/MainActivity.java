@@ -11,9 +11,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 import vn.edu.usth.musicplayer.Model.Playlist;
@@ -29,7 +26,7 @@ import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
     Playlist playlist;
-    ListView l;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,12 +51,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        //ListView
-//        String[] music = {"Songs", "Albums", "Artists", "Playlist"};
-//        l = (ListView) findViewById(R.id.listView);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, music);
-//        l.setAdapter(adapter);
         
         //create playlist
         playlist = new Playlist("default");
