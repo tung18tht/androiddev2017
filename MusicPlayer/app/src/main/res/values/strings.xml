@@ -5,12 +5,11 @@
     <string name="playing">Playing</string>
     <string name="download">Download</string>
 
-    <string name="library">Music Library</string>
     <string name="categories">Categories</string>
     <string name="songs">Songs</string>
     <string name="albums">Albums</string>
     <string name="artists">Artists</string>
     <string name="favorites">Favorites</string>
-    <string name="lists">Playlists</string>
+    <string name="playlist">Playlists</string>
 
 </resources>
