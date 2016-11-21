@@ -1,9 +1,10 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:id="@+id/homeFragment"
-             tools:context="vn.edu.usth.musicplayer.fragment.HomeFragment">
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/homeFragment"
+        tools:context="vn.edu.usth.musicplayer.fragment.HomeFragment">
 
     <TextView
             android:layout_width="match_parent"
