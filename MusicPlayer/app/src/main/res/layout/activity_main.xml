@@ -23,6 +23,9 @@
             android:layout_alignParentBottom="true"
             app:bb_tabXmlResource="@xml/bottombar_tabs"
             app:bb_behavior="underNavbar"
+            app:bb_activeTabColor="#FFFFFF"
+            app:bb_inActiveTabColor="#FFFFFF"
+            app:bb_inActiveTabAlpha="0.6"
             app:bb_showShadow="false"/>
 
 </RelativeLayout>

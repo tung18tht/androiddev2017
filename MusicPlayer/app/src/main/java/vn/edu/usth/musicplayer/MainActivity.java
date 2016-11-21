@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         playlist = new Playlist("default");
 
         if (copyMusicToSdCard()) {
-            playMusic(playlist.getSong(1).getUrl());
+//            playMusic(playlist.getSong(1).getUrl());
         }
 
         Log.i("status", "Main Activity created");

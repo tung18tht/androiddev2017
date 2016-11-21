@@ -2,14 +2,16 @@
     <tab
             id="@+id/tab_home"
             icon="@drawable/ic_bottom_home"
-            title="@string/home"/>
+            title="@string/home"
+            barColorWhenSelected="#795548"/>
     <tab
             id="@+id/tab_playing"
             icon="@drawable/ic_bottom_playing"
             title="@string/playing"
-            barColorWhenSelected="#AAAAAA"/>
+            barColorWhenSelected="#673AB7"/>
     <tab
             id="@+id/tab_download"
             icon="@drawable/ic_bottom_download"
-            title="@string/download"/>
+            title="@string/download"
+            barColorWhenSelected="#009688"/>
 </tabs>
