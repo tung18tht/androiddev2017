@@ -1,6 +1,11 @@
 package vn.edu.usth.musicplayer;
 
+import android.content.Context;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -11,6 +16,11 @@ import com.roughike.bottombar.OnTabSelectListener;
 import vn.edu.usth.musicplayer.fragment.DownloadFragment;
 import vn.edu.usth.musicplayer.fragment.HomeFragment;
 import vn.edu.usth.musicplayer.fragment.PlayingFragment;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
     
@@ -39,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         
+        if (copyMusicToSdCard()) {
+            playMusic();
+        }
+        
         Log.i("status", "Main Activity created");
     }
     
@@ -54,6 +68,52 @@ public class MainActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         
         transaction.commit();
+    }
+    
+    private boolean copyMusicToSdCard() {
+        String[] files = {"Infatuation - Maroon 5 [MP3 128kbps].mp3",
+                          "Lost Stars - Adam Levine [MP3 128kbps].mp3",
+                          "Misery - Maroon 5 [MP3 128kbps].mp3",
+                          "Stutter - Maroon 5 [MP3 128kbps].mp3"};
+    
+        try {
+            for (String fileName: files) {
+                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), fileName);
+    
+                FileOutputStream fos = new FileOutputStream(file);
+                InputStream is = getResources().getAssets().open(fileName, Context.MODE_WORLD_READABLE);
+                byte buf[] = new byte[1024];
+                int numRead = 0;
+                while ((numRead = is.read(buf)) > 0) {
+                    fos.write(buf, 0, numRead);
+                }
+                is.close();
+                fos.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.i("music", "Copy to SD Card failed");
+            return false;
+        }
+        Log.i("music", "Copied to SD Card");
+        return true;
+    }
+    
+    private boolean playMusic() {
+        MediaPlayer player = new MediaPlayer();
+        Uri musicURI = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/music/Stutter - Maroon 5 [MP3 128kbps].mp3");
+        player.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        try {
+            player.setDataSource(getApplicationContext(), musicURI);
+            player.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.i("music", "Background music failed to play");
+            return false;
+        }
+        player.start();
+        Log.i("music", "Background music played");
+        return true;
     }
     
     @Override
