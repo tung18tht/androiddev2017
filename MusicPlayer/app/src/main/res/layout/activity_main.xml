@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/bottomBar"
-            android:fitsSystemWindows="true"/>
+            android:layout_marginTop="@*android:dimen/status_bar_height"/>
 
     <com.roughike.bottombar.BottomBar
             android:id="@+id/bottomBar"

@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         });
         
         if (copyMusicToSdCard()) {
-            playMusic();
+//            playMusic();
         }
         
         Log.i("status", "Main Activity created");
