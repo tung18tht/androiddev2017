@@ -13,6 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
+
+import vn.edu.usth.musicplayer.Model.Playlist;
+import vn.edu.usth.musicplayer.Model.SongItem;
 import vn.edu.usth.musicplayer.fragment.DownloadFragment;
 import vn.edu.usth.musicplayer.fragment.HomeFragment;
 import vn.edu.usth.musicplayer.fragment.PlayingFragment;
@@ -23,7 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
-    
+    Playlist pl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,9 +51,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        
+        //create playlist
+        pl = new Playlist("default");
+
         if (copyMusicToSdCard()) {
+<<<<<<< HEAD
+            playMusic(pl.getSong(1).getUrl());
+=======
 //            playMusic();
+>>>>>>> 9bbba19fa7a08b33bd2c233676137453731d32ff
         }
         
         Log.i("status", "Main Activity created");
@@ -89,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 is.close();
                 fos.close();
+                SongItem si = new SongItem(file);
+                pl.addSong(si);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -99,9 +110,9 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
     
-    private boolean playMusic() {
+    private boolean playMusic(String filename) {
         MediaPlayer player = new MediaPlayer();
-        Uri musicURI = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/music/Stutter - Maroon 5 [MP3 128kbps].mp3");
+        Uri musicURI = Uri.parse(filename);
         player.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
             player.setDataSource(getApplicationContext(), musicURI);
