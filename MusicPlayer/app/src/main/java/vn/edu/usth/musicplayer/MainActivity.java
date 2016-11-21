@@ -11,13 +11,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
 import vn.edu.usth.musicplayer.Model.Playlist;
 import vn.edu.usth.musicplayer.Model.SongItem;
 import vn.edu.usth.musicplayer.fragment.DownloadFragment;
 import vn.edu.usth.musicplayer.fragment.HomeFragment;
 import vn.edu.usth.musicplayer.fragment.PlayingFragment;
+import vn.edu.usth.musicplayer.fragment.SongsFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -40,13 +43,24 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.tab_home:
                         loadFragment(new HomeFragment());
                         break;
-                        
+                
                     case R.id.tab_playing:
                         loadFragment(new PlayingFragment());
                         break;
-                        
+                
                     case R.id.tab_download:
                         loadFragment(new DownloadFragment());
+                        break;
+                }
+            }
+        });
+        
+        bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
+            @Override
+            public void onTabReSelected(@IdRes int tabId) {
+                switch (tabId) {
+                    case R.id.tab_home:
+                        loadFragment(new HomeFragment());
                         break;
                 }
             }
@@ -62,7 +76,11 @@ public class MainActivity extends AppCompatActivity {
         Log.i("status", "Main Activity created");
     }
     
-    private void loadFragment(Fragment frag) {
+    public void showSongList(View v) {
+        loadFragment(new SongsFragment());
+    }
+    
+    public void loadFragment(Fragment frag) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.contentContainer);
