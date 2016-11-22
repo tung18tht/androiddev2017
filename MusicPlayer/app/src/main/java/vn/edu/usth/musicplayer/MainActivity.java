@@ -109,10 +109,6 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    public void showSongList(View v) {
-        loadFragment(new SongsFragment());
-    }
-
     public void reloadPlayFragment() {
         loadFragment(new PlayingFragment());
     }
