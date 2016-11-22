@@ -1,9 +1,10 @@
 package vn.edu.usth.musicplayer.Model;
 
+import android.graphics.drawable.Drawable;
 import android.media.MediaMetadataRetriever;
-import android.net.Uri;
-import android.os.Environment;
+import android.os.Bundle;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 
 /**
@@ -12,13 +13,28 @@ import java.io.File;
 
 public class SongItem {
     private String url;
-    private byte[] art;
+    private Drawable art;
     private String album;
-    private String artish;
+    private String artist;
     private String genre;
     private String title;
+    private String duration;
 
     public void SongItem(){
+
+    }
+    public SongItem(File file) {
+        this.url = file.getPath();
+        MediaMetadataRetriever mdr  = new MediaMetadataRetriever();
+        mdr.setDataSource(url);
+        ByteArrayInputStream bis = new ByteArrayInputStream(mdr.getEmbeddedPicture());
+        this.art = Drawable.createFromStream(bis, "art");
+        this.album = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
+        this.artist = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+        this.genre = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE);
+        this.title = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+        this.duration = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+
 
     }
 
@@ -26,58 +42,27 @@ public class SongItem {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public SongItem(File file) {
-        this.url = file.getPath();
-        MediaMetadataRetriever mdr  = new MediaMetadataRetriever();
-        mdr.setDataSource(url);
-        this.art = mdr.getEmbeddedPicture();
-        this.album = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
-        this.artish = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
-        this.genre = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE);
-        this.title = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+    public String getDuration() {
+        return duration;
     }
 
     public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public byte[] getArt() {
+    public Drawable getArt() {
         return art;
-    }
-
-    public void setArt(byte[] art) {
-        this.art = art;
     }
 
     public String getAlbum() {
         return album;
     }
 
-    public void setAlbum(String album) {
-        this.album = album;
-    }
-
-    public String getArtish() {
-        return artish;
-    }
-
-    public void setArtish(String artish) {
-        this.artish = artish;
+    public String getArtist() {
+        return artist;
     }
 
     public String getGenre() {
         return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
     }
 }

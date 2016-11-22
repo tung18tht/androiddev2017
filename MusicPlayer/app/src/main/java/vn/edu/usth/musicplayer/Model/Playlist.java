@@ -38,6 +38,9 @@ public class Playlist {
             titles.add(song.getTitle());
         }
         return titles;
+    }
 
+    public int getNumOfSong() {
+        return list.size();
     }
 }
