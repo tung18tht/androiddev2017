@@ -4,7 +4,6 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.IdRes;
@@ -14,20 +13,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 import vn.edu.usth.musicplayer.Model.Playlist;
 import vn.edu.usth.musicplayer.Model.SongItem;
 import vn.edu.usth.musicplayer.fragment.DownloadFragment;
 import vn.edu.usth.musicplayer.fragment.HomeFragment;
 import vn.edu.usth.musicplayer.fragment.PlayingFragment;
+import vn.edu.usth.musicplayer.fragment.SongsFragment;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
     Playlist playlist;
@@ -66,6 +65,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
+            @Override
+            public void onTabReSelected(@IdRes int tabId) {
+                switch (tabId) {
+                    case R.id.tab_home:
+                        loadFragment(new HomeFragment());
+                        break;
+                }
+            }
+        });
+
         loadSong(getCurrentSong());
 
         //ListView
@@ -75,13 +86,12 @@ public class MainActivity extends AppCompatActivity {
 //        l.setAdapter(adapter);
 
 
-
         Log.i("status", "Main Activity created");
     }
 
     private void loadFragment(Fragment frag) {
 
-        if(frag instanceof PlayingFragment){
+        if (frag instanceof PlayingFragment) {
             Bundle data = new Bundle();
             data.putString("currentSongURL", getCurrentSong().getUrl());
             data.putInt("currentPos", player.getCurrentPosition());
@@ -90,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.contentContainer);
-        if(fragment == null) {
+        if (fragment == null) {
             transaction.add(R.id.contentContainer, frag);
         } else {
             transaction.replace(R.id.contentContainer, frag);
@@ -100,18 +110,22 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    public void reloadPlayFragment(){
+    public void showSongList(View v) {
+        loadFragment(new SongsFragment());
+    }
+
+    public void reloadPlayFragment() {
         loadFragment(new PlayingFragment());
     }
 
     private boolean copyMusicToSdCard() {
         String[] files = {"Infatuation - Maroon 5 [MP3 128kbps].mp3",
-                          "Lost Stars - Adam Levine [MP3 128kbps].mp3",
-                          "Misery - Maroon 5 [MP3 128kbps].mp3",
-                          "Stutter - Maroon 5 [MP3 128kbps].mp3"};
+                "Lost Stars - Adam Levine [MP3 128kbps].mp3",
+                "Misery - Maroon 5 [MP3 128kbps].mp3",
+                "Stutter - Maroon 5 [MP3 128kbps].mp3"};
 
         try {
-            for (String fileName: files) {
+            for (String fileName : files) {
                 File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), fileName);
 
                 FileOutputStream fos = new FileOutputStream(file);
@@ -157,45 +171,44 @@ public class MainActivity extends AppCompatActivity {
             pauseMusic();
             isPlaying = false;
             imgPlay.setImageResource(R.drawable.ic_play);
-        }
-        else {
+        } else {
             playMusic();
             isPlaying = true;
             imgPlay.setImageResource(R.drawable.ic_pause);
         }
     }
 
-    public void onNextClick(View v){
+    public void onNextClick(View v) {
         nextSong();
         loadFragment(new PlayingFragment());
-        if(isPlaying)
+        if (isPlaying)
             player.start();
     }
 
-    public void onPrevClick(View v){
+    public void onPrevClick(View v) {
         prevSong();
         loadFragment(new PlayingFragment());
         if (isPlaying)
             player.start();
     }
 
-    public void progressAdvance(int pos){
+    public void progressAdvance(int pos) {
         player.seekTo(pos);
     }
 
     //controller method
 
-    private void playMusic(){
+    private void playMusic() {
         player.start();
     }
 
-    private void pauseMusic(){
+    private void pauseMusic() {
         player.pause();
     }
 
     private void nextSong() {
         index++;
-        if(index >= playlist.getNumOfSong()){
+        if (index >= playlist.getNumOfSong()) {
             index = index % playlist.getNumOfSong();
         }
         player.reset();
@@ -204,8 +217,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void prevSong() {
         index--;
-        if(index < 0) {
-            index+=playlist.getNumOfSong();
+        if (index < 0) {
+            index += playlist.getNumOfSong();
         }
         player.reset();
         loadSong(getCurrentSong());
