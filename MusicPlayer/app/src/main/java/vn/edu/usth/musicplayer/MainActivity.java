@@ -21,7 +21,6 @@ import vn.edu.usth.musicplayer.Model.SongItem;
 import vn.edu.usth.musicplayer.fragment.DownloadFragment;
 import vn.edu.usth.musicplayer.fragment.HomeFragment;
 import vn.edu.usth.musicplayer.fragment.PlayingFragment;
-import vn.edu.usth.musicplayer.fragment.SongsFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
