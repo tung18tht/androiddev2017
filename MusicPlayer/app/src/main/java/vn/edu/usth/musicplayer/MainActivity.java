@@ -34,17 +34,17 @@ public class MainActivity extends AppCompatActivity {
     MediaPlayer player;
     boolean isPlaying = false;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //create playlist
         playlist = new Playlist("default");
 
         copyMusicToSdCard();
         player = new MediaPlayer();
+
+        loadSong(getCurrentSong());
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -77,15 +77,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        loadSong(getCurrentSong());
-
-        //ListView
-//        String[] music = {"Songs", "Albums", "Artists", "Playlist"};
-//        l = (ListView) findViewById(R.id.listView);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, music);
-//        l.setAdapter(adapter);
-
-
         Log.i("status", "Main Activity created");
     }
 
@@ -112,10 +103,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void showSongList(View v) {
         loadFragment(new SongsFragment());
-    }
-
-    public void reloadPlayFragment() {
-        loadFragment(new PlayingFragment());
     }
 
     private boolean copyMusicToSdCard() {
@@ -164,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    //handler
     public void onPlayClick(View v) {
         ImageButton imgPlay = (ImageButton) v.findViewById(R.id.imgPlay);
         if (isPlaying) {
@@ -196,8 +182,6 @@ public class MainActivity extends AppCompatActivity {
         player.seekTo(pos);
     }
 
-    //controller method
-
     private void playMusic() {
         player.start();
     }
@@ -227,8 +211,6 @@ public class MainActivity extends AppCompatActivity {
     private SongItem getCurrentSong() {
         return playlist.getSong(index);
     }
-
-//    public boolean isPlaying(){return isPlaying;}
 
     @Override
     protected void onStart() {
@@ -264,18 +246,3 @@ public class MainActivity extends AppCompatActivity {
         Log.i("status", "Main Activity destroyed");
     }
 }
-
-//class myAsyncTask extends AsyncTask<Void, Void, Void>{
-//
-//    @Override
-//    protected Void doInBackground(Void... voids) {
-//        try {
-//            synchronized (this) {
-//                wait(500);
-//            }
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-//}
