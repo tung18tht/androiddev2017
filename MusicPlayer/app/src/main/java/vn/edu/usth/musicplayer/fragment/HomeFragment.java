@@ -33,6 +33,7 @@ public class HomeFragment extends Fragment {
         pager.setAdapter(adapter);
 
         TabLayout tabLayout = (TabLayout) getView().findViewById(R.id.tab);
+        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.homeColor));
         tabLayout.setupWithViewPager(pager);
     }
 
