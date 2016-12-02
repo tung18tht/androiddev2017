@@ -46,7 +46,10 @@ public class HomeFragment extends Fragment {
         }
 
         private void setupTitles() {
-            titles = new String[]{"Hanoi", "Paris", "Toulouse"};
+            String song = getString(R.string.songs);
+            String album = getString(R.string.albums);
+            String artist = getString(R.string.artists);
+            titles = new String[]{song, album, artist};
         }
 
         @Override
@@ -55,8 +58,17 @@ public class HomeFragment extends Fragment {
         }
 
         @Override
-        public SongsFragment getItem(int page) {
-            return new SongsFragment();
+        public Fragment getItem(int page) {
+            switch (page) {
+                case 1:
+                    return new SongsFragment();
+                case 2:
+                    return new SongsFragment();
+                case 3:
+                    return new SongsFragment();
+                default:
+                    return new SongsFragment();
+            }
         }
 
         @Override

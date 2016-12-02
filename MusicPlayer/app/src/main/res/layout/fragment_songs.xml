@@ -6,58 +6,10 @@
         android:id="@+id/songsFragment"
         tools:context="vn.edu.usth.musicplayer.fragment.SongsFragment">
 
-    <RelativeLayout
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:orientation="vertical"
-            android:background="@color/homeColor">
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:text="@string/app_name"
-                android:textSize="22sp"
-                android:textStyle="normal|bold"
-                android:fontFamily="sans-serif"
-                android:textColor="@android:color/white"/>
-
-    </RelativeLayout>
-
-    <LinearLayout
-            android:id="@+id/songs"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/title">
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/songs"
-                android:textSize="18sp"
-                android:textStyle="normal|bold"
-                android:fontFamily="sans-serif"/>
-
-        <View
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/homeColor"/>
-
-    </LinearLayout>
-
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_below="@+id/songs"
             android:fillViewport="false">
 
         <LinearLayout
