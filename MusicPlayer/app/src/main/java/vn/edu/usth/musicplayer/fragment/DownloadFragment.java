@@ -28,7 +28,20 @@ public class DownloadFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_download, container, false);
+        View view = inflater.inflate(R.layout.fragment_download, container, false);
+        buttonDownload = (Button)view.findViewById(R.id.downloadMusicButton);
+        buttonDownload.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                downloadManager = (DownloadManager)getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
+                Uri uri = Uri.parse("http://s1mp3.hot1.cache31.vcdn.vn/985969740630ef6eb621/1972237400245003279?key=wiL044SMvU54ZVfg43hjbg&expires=1480740142&filename=Linkin%20Park%20-%20Linkin%20Park.mp3");
+                DownloadManager.Request request = new DownloadManager.Request(uri);
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                Long reference = downloadManager.enqueue(request);
+            }
+        });
+
+        return view;
     }
 
 }
