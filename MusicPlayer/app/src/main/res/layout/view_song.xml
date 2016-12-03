@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="4dp"
-                android:text="Lost Stars"
+                android:id="@+id/songName"
                 android:textSize="24sp"/>
 
         <TextView

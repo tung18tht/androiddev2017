@@ -9,8 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import org.json.JSONArray;
+import android.widget.TextView;
+import org.json.JSONObject;
 import vn.edu.usth.musicplayer.R;
+
+import java.util.ArrayList;
 
 public class SongsFragment extends Fragment {
     public SongsFragment() {
@@ -37,17 +40,14 @@ public class SongsFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        JSONArray data = new JSONArray();
-        data.put("LMAO");
-        data.put("LMAO");
-        data.put("LMAO");
+        ArrayList<JSONObject> data = new ArrayList<>();
         adapter = new Adapter(data);
         recyclerView.setAdapter(adapter);
     }
 }
 
 class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
-    private JSONArray data;
+    private ArrayList<JSONObject> data;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         RelativeLayout songView;
@@ -57,7 +57,7 @@ class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         }
     }
 
-    Adapter(JSONArray data) {
+    Adapter(ArrayList<JSONObject> data) {
         this.data = data;
     }
 
@@ -70,11 +70,11 @@ class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-//        holder.textView.setText(data[position]);
+        TextView songName = (TextView) holder.songView.findViewById(R.id.songName);
     }
 
     @Override
     public int getItemCount() {
-        return data.length();
+        return data.size();
     }
 }
