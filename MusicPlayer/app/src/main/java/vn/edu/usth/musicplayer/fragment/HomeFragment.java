@@ -29,10 +29,10 @@ public class HomeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         PagerAdapter adapter = new HomeFragmentPagerAdapter(getChildFragmentManager());
-        ViewPager pager = (ViewPager) getView().findViewById(R.id.pager);
+        ViewPager pager = (ViewPager) getActivity().findViewById(R.id.pager);
         pager.setAdapter(adapter);
 
-        TabLayout tabLayout = (TabLayout) getView().findViewById(R.id.tab);
+        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tab);
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.homeColor));
         tabLayout.setupWithViewPager(pager);
     }
