@@ -80,14 +80,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadFragment(Fragment frag) {
-
         if (frag instanceof PlayingFragment) {
             Bundle data = new Bundle();
             data.putString("currentSongURL", getCurrentSong().getUrl());
             data.putInt("currentPos", player.getCurrentPosition());
             frag.setArguments(data);
         }
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
 
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.contentContainer);
         if (fragment == null) {

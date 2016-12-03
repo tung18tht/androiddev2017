@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment {
     }
 
     private class HomeFragmentPagerAdapter extends FragmentPagerAdapter {
-        private final int PAGE_COUNT = 3;
+        private final int PAGE_COUNT = 2;
         private String titles[];
 
         public HomeFragmentPagerAdapter(FragmentManager fm) {
@@ -48,9 +48,8 @@ public class HomeFragment extends Fragment {
 
         private void setupTitles() {
             String song = getString(R.string.songs);
-            String album = getString(R.string.albums);
             String artist = getString(R.string.artists);
-            titles = new String[]{song, album, artist};
+            titles = new String[]{song, artist};
         }
 
         @Override
@@ -64,8 +63,6 @@ public class HomeFragment extends Fragment {
                 case 1:
                     return new SongsFragment();
                 case 2:
-                    return new SongsFragment();
-                case 3:
                     return new SongsFragment();
                 default:
                     return new SongsFragment();

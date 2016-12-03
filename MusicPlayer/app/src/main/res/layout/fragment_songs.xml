@@ -1,714 +1,707 @@
-<RelativeLayout
+<ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/songsFragment"
-        tools:context="vn.edu.usth.musicplayer.fragment.SongsFragment">
+        tools:context="vn.edu.usth.musicplayer.fragment.SongsFragment"
+        android:orientation="vertical">
 
-    <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+    <LinearLayout
             android:orientation="vertical"
-            android:fillViewport="false">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="#000000"
+            android:showDividers="middle">
 
-        <LinearLayout
-                android:orientation="vertical"
+        <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="#000000"
-                android:showDividers="middle">
+                android:layout_height="75dp">
 
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp">
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/ic_bottom_playing"/>
 
-                <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginLeft="25dp"
-                        android:src="@drawable/ic_bottom_playing"/>
-
-                <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="75dp"
-                        android:orientation="vertical">
-
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginBottom="4dp"
-                            android:text="Lost Stars"
-                            android:textSize="24sp"/>
-
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:text="Adam Levine"
-                            android:textSize="18sp"/>
-
-                </LinearLayout>
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="75dp"
+                    android:orientation="vertical">
 
                 <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:text="04:36"
-                        android:textSize="18sp"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp">
-
-                <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginLeft="25dp"
-                        android:src="@drawable/ic_bottom_playing"/>
-
-                <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="75dp"
-                        android:orientation="vertical">
-
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginBottom="4dp"
-                            android:text="Not Afraid"
-                            android:textSize="24sp"/>
-
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:text="Eminem"
-                            android:textSize="18sp"/>
-
-                </LinearLayout>
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Lost Stars"
+                        android:textSize="24sp"/>
 
                 <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:text="03:21"
-                        android:textSize="18sp"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp"
-                    android:background="#DDD">
-
-                <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginLeft="25dp"
-                        android:src="@drawable/ic_pausing"/>
-
-                <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="75dp"
-                        android:orientation="vertical">
+                        android:text="Adam Levine"
+                        android:textSize="18sp"/>
 
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginBottom="4dp"
-                            android:text="Maybe"
-                            android:textSize="24sp"/>
+            </LinearLayout>
 
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:text="Yiruma"
-                            android:textSize="18sp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="04:36"
+                    android:textSize="18sp"/>
+        </RelativeLayout>
 
-                </LinearLayout>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp">
+
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/ic_bottom_playing"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="75dp"
+                    android:orientation="vertical">
 
                 <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:text="02:58"
-                        android:textSize="18sp"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp">
-
-                <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginLeft="25dp"
-                        android:src="@drawable/ic_bottom_playing"/>
-
-                <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="75dp"
-                        android:orientation="vertical">
-
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginBottom="4dp"
-                            android:text="Happy New Year"
-                            android:textSize="24sp"/>
-
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:text="Abba"
-                            android:textSize="18sp"/>
-
-                </LinearLayout>
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Not Afraid"
+                        android:textSize="24sp"/>
 
                 <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:text="05:17"
-                        android:textSize="18sp"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp">
-
-                <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginLeft="25dp"
-                        android:src="@drawable/ic_bottom_playing"/>
-
-                <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="75dp"
-                        android:orientation="vertical">
+                        android:text="Eminem"
+                        android:textSize="18sp"/>
 
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginBottom="4dp"
-                            android:text="Lost Stars"
-                            android:textSize="24sp"/>
+            </LinearLayout>
 
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:text="Adam Levine"
-                            android:textSize="18sp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="03:21"
+                    android:textSize="18sp"/>
+        </RelativeLayout>
 
-                </LinearLayout>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:background="#DDD">
+
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/ic_pausing"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="75dp"
+                    android:orientation="vertical">
 
                 <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:text="04:36"
-                        android:textSize="18sp"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp">
-
-                <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginLeft="25dp"
-                        android:src="@drawable/ic_bottom_playing"/>
-
-                <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="75dp"
-                        android:orientation="vertical">
-
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginBottom="4dp"
-                            android:text="Not Afraid"
-                            android:textSize="24sp"/>
-
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:text="Eminem"
-                            android:textSize="18sp"/>
-
-                </LinearLayout>
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Maybe"
+                        android:textSize="24sp"/>
 
                 <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:text="03:21"
-                        android:textSize="18sp"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp">
-
-                <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginLeft="25dp"
-                        android:src="@drawable/ic_bottom_playing"/>
-
-                <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="75dp"
-                        android:orientation="vertical">
+                        android:text="Yiruma"
+                        android:textSize="18sp"/>
 
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginBottom="4dp"
-                            android:text="Maybe"
-                            android:textSize="24sp"/>
+            </LinearLayout>
 
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:text="Yiruma"
-                            android:textSize="18sp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="02:58"
+                    android:textSize="18sp"/>
+        </RelativeLayout>
 
-                </LinearLayout>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp">
+
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/ic_bottom_playing"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="75dp"
+                    android:orientation="vertical">
 
                 <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:text="02:58"
-                        android:textSize="18sp"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp">
-
-                <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginLeft="25dp"
-                        android:src="@drawable/ic_bottom_playing"/>
-
-                <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="75dp"
-                        android:orientation="vertical">
-
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginBottom="4dp"
-                            android:text="Happy New Year"
-                            android:textSize="24sp"/>
-
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:text="Abba"
-                            android:textSize="18sp"/>
-
-                </LinearLayout>
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Happy New Year"
+                        android:textSize="24sp"/>
 
                 <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:text="05:17"
-                        android:textSize="18sp"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp">
-
-                <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginLeft="25dp"
-                        android:src="@drawable/ic_bottom_playing"/>
-
-                <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="75dp"
-                        android:orientation="vertical">
+                        android:text="Abba"
+                        android:textSize="18sp"/>
 
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginBottom="4dp"
-                            android:text="Lost Stars"
-                            android:textSize="24sp"/>
+            </LinearLayout>
 
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:text="Adam Levine"
-                            android:textSize="18sp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="05:17"
+                    android:textSize="18sp"/>
+        </RelativeLayout>
 
-                </LinearLayout>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp">
+
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/ic_bottom_playing"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="75dp"
+                    android:orientation="vertical">
 
                 <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:text="04:36"
-                        android:textSize="18sp"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp">
-
-                <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginLeft="25dp"
-                        android:src="@drawable/ic_bottom_playing"/>
-
-                <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="75dp"
-                        android:orientation="vertical">
-
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginBottom="4dp"
-                            android:text="Not Afraid"
-                            android:textSize="24sp"/>
-
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:text="Eminem"
-                            android:textSize="18sp"/>
-
-                </LinearLayout>
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Lost Stars"
+                        android:textSize="24sp"/>
 
                 <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:text="03:21"
-                        android:textSize="18sp"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp">
-
-                <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginLeft="25dp"
-                        android:src="@drawable/ic_bottom_playing"/>
-
-                <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="75dp"
-                        android:orientation="vertical">
+                        android:text="Adam Levine"
+                        android:textSize="18sp"/>
 
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginBottom="4dp"
-                            android:text="Maybe"
-                            android:textSize="24sp"/>
+            </LinearLayout>
 
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:text="Yiruma"
-                            android:textSize="18sp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="04:36"
+                    android:textSize="18sp"/>
+        </RelativeLayout>
 
-                </LinearLayout>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp">
+
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/ic_bottom_playing"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="75dp"
+                    android:orientation="vertical">
 
                 <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:text="02:58"
-                        android:textSize="18sp"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp">
-
-                <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginLeft="25dp"
-                        android:src="@drawable/ic_bottom_playing"/>
-
-                <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="75dp"
-                        android:orientation="vertical">
-
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginBottom="4dp"
-                            android:text="Happy New Year"
-                            android:textSize="24sp"/>
-
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:text="Abba"
-                            android:textSize="18sp"/>
-
-                </LinearLayout>
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Not Afraid"
+                        android:textSize="24sp"/>
 
                 <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:text="05:17"
-                        android:textSize="18sp"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp">
-
-                <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginLeft="25dp"
-                        android:src="@drawable/ic_bottom_playing"/>
-
-                <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="75dp"
-                        android:orientation="vertical">
+                        android:text="Eminem"
+                        android:textSize="18sp"/>
 
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginBottom="4dp"
-                            android:text="Lost Stars"
-                            android:textSize="24sp"/>
+            </LinearLayout>
 
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:text="Adam Levine"
-                            android:textSize="18sp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="03:21"
+                    android:textSize="18sp"/>
+        </RelativeLayout>
 
-                </LinearLayout>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp">
+
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/ic_bottom_playing"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="75dp"
+                    android:orientation="vertical">
 
                 <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:text="04:36"
-                        android:textSize="18sp"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp">
-
-                <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginLeft="25dp"
-                        android:src="@drawable/ic_bottom_playing"/>
-
-                <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="75dp"
-                        android:orientation="vertical">
-
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginBottom="4dp"
-                            android:text="Not Afraid"
-                            android:textSize="24sp"/>
-
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:text="Eminem"
-                            android:textSize="18sp"/>
-
-                </LinearLayout>
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Maybe"
+                        android:textSize="24sp"/>
 
                 <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:text="03:21"
-                        android:textSize="18sp"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp">
-
-                <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginLeft="25dp"
-                        android:src="@drawable/ic_bottom_playing"/>
-
-                <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="75dp"
-                        android:orientation="vertical">
+                        android:text="Yiruma"
+                        android:textSize="18sp"/>
 
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginBottom="4dp"
-                            android:text="Maybe"
-                            android:textSize="24sp"/>
+            </LinearLayout>
 
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:text="Yiruma"
-                            android:textSize="18sp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="02:58"
+                    android:textSize="18sp"/>
+        </RelativeLayout>
 
-                </LinearLayout>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp">
+
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/ic_bottom_playing"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="75dp"
+                    android:orientation="vertical">
 
                 <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:text="02:58"
-                        android:textSize="18sp"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp">
-
-                <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginLeft="25dp"
-                        android:src="@drawable/ic_bottom_playing"/>
-
-                <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="75dp"
-                        android:orientation="vertical">
-
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginBottom="4dp"
-                            android:text="Happy New Year"
-                            android:textSize="24sp"/>
-
-                    <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:text="Abba"
-                            android:textSize="18sp"/>
-
-                </LinearLayout>
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Happy New Year"
+                        android:textSize="24sp"/>
 
                 <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:text="05:17"
+                        android:layout_width="wrap_content"
+                        android:text="Abba"
                         android:textSize="18sp"/>
-            </RelativeLayout>
 
-        </LinearLayout>
-    </ScrollView>
+            </LinearLayout>
 
-</RelativeLayout>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="05:17"
+                    android:textSize="18sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp">
+
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/ic_bottom_playing"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="75dp"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Lost Stars"
+                        android:textSize="24sp"/>
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="Adam Levine"
+                        android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="04:36"
+                    android:textSize="18sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp">
+
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/ic_bottom_playing"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="75dp"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Not Afraid"
+                        android:textSize="24sp"/>
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="Eminem"
+                        android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="03:21"
+                    android:textSize="18sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp">
+
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/ic_bottom_playing"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="75dp"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Maybe"
+                        android:textSize="24sp"/>
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="Yiruma"
+                        android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="02:58"
+                    android:textSize="18sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp">
+
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/ic_bottom_playing"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="75dp"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Happy New Year"
+                        android:textSize="24sp"/>
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="Abba"
+                        android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="05:17"
+                    android:textSize="18sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp">
+
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/ic_bottom_playing"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="75dp"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Lost Stars"
+                        android:textSize="24sp"/>
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="Adam Levine"
+                        android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="04:36"
+                    android:textSize="18sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp">
+
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/ic_bottom_playing"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="75dp"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Not Afraid"
+                        android:textSize="24sp"/>
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="Eminem"
+                        android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="03:21"
+                    android:textSize="18sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp">
+
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/ic_bottom_playing"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="75dp"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Maybe"
+                        android:textSize="24sp"/>
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="Yiruma"
+                        android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="02:58"
+                    android:textSize="18sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp">
+
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:src="@drawable/ic_bottom_playing"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="75dp"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="Happy New Year"
+                        android:textSize="24sp"/>
+
+                <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="Abba"
+                        android:textSize="18sp"/>
+
+            </LinearLayout>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="05:17"
+                    android:textSize="18sp"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+</ScrollView>
