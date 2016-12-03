@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+        transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
 
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.contentContainer);
         if (fragment == null) {
