@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class SongAPI {
     private static com.android.volley.RequestQueue queue;
     private final static String[] songNames = {"Hello", "Grenade"};
-    private static ArrayList<JSONObject> songs = null;
+    private static ArrayList<JSONObject> songs = new ArrayList<>();
 
     private SongAPI() {
     }
@@ -74,7 +74,7 @@ public class SongAPI {
                     songInfoObject.put("title", JsonPath.read(document, "$.title"));
                     songInfoObject.put("artist", JsonPath.read(document, "$.artist"));
                     songInfoObject.put("duration", JsonPath.read(document, "$.duration"));
-                    songInfoObject.put("artwork", JsonPath.read(document, "http://image.mp3.zdn.vn//thumb/240_240/" + "$.thumbnail"));
+                    songInfoObject.put("artwork", "http://image.mp3.zdn.vn//thumb/240_240/" +  JsonPath.read(document, "$.thumbnail"));
                     songInfoObject.put("source", JsonPath.read(document, "$.source.128"));
                 } catch (JSONException e) {
                     e.printStackTrace();
