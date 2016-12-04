@@ -21,7 +21,16 @@ import static vn.edu.usth.musicplayer.fragment.SongsFragment.songsFragmentAdapte
 
 public class SongAPI {
     private static com.android.volley.RequestQueue queue;
-    private final static String[] songNames = {"Hello", "Grenade"};
+    private final static String[] songNames = {
+            "Hello",
+            "Grenade",
+            "Everyday",
+            "Greedy",
+            "Moonlight",
+            "It will rain",
+            "Not afraid",
+            "Love the Way You Lie"
+    };
     private static ArrayList<JSONObject> songs = new ArrayList<>();
 
     private SongAPI() {

@@ -40,4 +40,10 @@
             android:layout_centerVertical="true"
             android:id="@+id/songDuration"
             android:textSize="18sp"/>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/black"/>
 </RelativeLayout>
