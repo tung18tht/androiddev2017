@@ -4,11 +4,12 @@
         android:layout_height="75dp">
 
     <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="25dp"
-            android:id="@+id/songArtwork"/>
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/songArtwork"
+            android:background="#DDD"/>
 
     <LinearLayout
             android:layout_width="wrap_content"

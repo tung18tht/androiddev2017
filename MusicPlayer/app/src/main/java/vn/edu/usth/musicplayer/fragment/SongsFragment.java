@@ -1,5 +1,6 @@
 package vn.edu.usth.musicplayer.fragment;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.ImageRequest;
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.JsonPath;
 import org.json.JSONObject;
@@ -19,8 +23,12 @@ import vn.edu.usth.musicplayer.R;
 
 import java.util.ArrayList;
 
+import static vn.edu.usth.musicplayer.fragment.SongsFragment.queue;
+
 public class SongsFragment extends Fragment {
     public static RecyclerView.Adapter songsFragmentAdapter;
+    static RequestQueue queue;
+
 
     public SongsFragment() {
         super();
@@ -35,6 +43,8 @@ public class SongsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        queue = vn.edu.usth.musicplayer.Model.RequestQueue.getQueue(getActivity());
 
         RecyclerView recyclerView;
         RecyclerView.LayoutManager layoutManager;
@@ -72,8 +82,7 @@ class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        ImageView songArtwork = (ImageView) holder.songView.findViewById(R.id.songArtwork);
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         TextView songTitle = (TextView) holder.songView.findViewById(R.id.songTitle);
         TextView songArtist = (TextView) holder.songView.findViewById(R.id.songArtist);
         TextView songDuration = (TextView) holder.songView.findViewById(R.id.songDuration);
@@ -84,6 +93,18 @@ class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         songTitle.setText((String) JsonPath.read(songInfo, "$.title"));
         songArtist.setText((String) JsonPath.read(songInfo, "$.artist"));
         songDuration.setText(formatTime((Integer)JsonPath.read(songInfo, "$.duration")));
+
+        Response.Listener<Bitmap> artworkRequestListener = new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap artwork) {
+                ImageView songArtwork = (ImageView) holder.songView.findViewById(R.id.songArtwork);
+                songArtwork.setImageBitmap(artwork);
+            }
+        };
+
+        ImageRequest artworkRequest = new ImageRequest((String) JsonPath.read(songInfo, "$.artwork"), artworkRequestListener, 0, 0, ImageView.ScaleType.CENTER, Bitmap.Config.ARGB_8888, null);
+
+        queue.add(artworkRequest);
     }
 
     private String formatTime(Integer second) {
