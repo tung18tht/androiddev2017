@@ -13,6 +13,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static vn.edu.usth.musicplayer.fragment.SongsFragment.songsFragmentAdapter;
+
 /**
  * Created by MacbookPro on 4/12/16.
  */
@@ -26,7 +28,7 @@ public class SongAPI {
     }
 
     public static ArrayList<JSONObject> getSongs(Context context) {
-        if(songs == null) {
+        if(songs.isEmpty()) {
             queue = RequestQueue.getQueue(context);
             getSongsFromZingAPI();
         }
@@ -80,7 +82,23 @@ public class SongAPI {
                     e.printStackTrace();
                 }
 
-                songs.add(songInfoObject);
+                if (!isSongExisted(songInfoObject)) {
+                    songs.add(songInfoObject);
+                    songsFragmentAdapter.notifyDataSetChanged();
+                }
+            }
+
+            private boolean isSongExisted(JSONObject newSong) {
+                for (JSONObject song: songs) {
+                    Object newSongDocument = Configuration.defaultConfiguration().jsonProvider().parse(newSong.toString());
+                    Object songDocument = Configuration.defaultConfiguration().jsonProvider().parse(song.toString());
+                    String songSrc = JsonPath.read(songDocument, "$.source");
+                    String newSongSrc = JsonPath.read(newSongDocument, "$.source");
+                    if (songSrc.compareTo(newSongSrc) == 0) {
+                        return true;
+                    }
+                }
+                return false;
             }
         };
 
