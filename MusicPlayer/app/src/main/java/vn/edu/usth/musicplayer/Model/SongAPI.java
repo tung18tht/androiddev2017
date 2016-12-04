@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import static vn.edu.usth.musicplayer.fragment.SongsFragment.songsFragmentAdapter;
 
@@ -93,6 +94,16 @@ public class SongAPI {
 
                 if (!isSongExisted(songInfoObject)) {
                     songs.add(songInfoObject);
+                    songs.sort(new Comparator<JSONObject>() {
+                        @Override
+                        public int compare(JSONObject song1, JSONObject song2) {
+                            Object document1 = Configuration.defaultConfiguration().jsonProvider().parse(song1.toString());
+                            Object document2 = Configuration.defaultConfiguration().jsonProvider().parse(song2.toString());
+                            String song1Title = JsonPath.read(document1, "$.title");
+                            String song2Title = JsonPath.read(document2, "$.title");
+                            return song1Title.compareTo(song2Title);
+                        }
+                    });
                     songsFragmentAdapter.notifyDataSetChanged();
                 }
             }
