@@ -11,12 +11,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import com.jayway.jsonpath.Configuration;
+import com.jayway.jsonpath.JsonPath;
 import org.json.JSONObject;
+import vn.edu.usth.musicplayer.Model.SongAPI;
 import vn.edu.usth.musicplayer.R;
 
 import java.util.ArrayList;
 
 public class SongsFragment extends Fragment {
+    public static RecyclerView.Adapter songsFragmentAdapter;
+
     public SongsFragment() {
         super();
     }
@@ -32,7 +37,6 @@ public class SongsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         RecyclerView recyclerView;
-        RecyclerView.Adapter adapter;
         RecyclerView.LayoutManager layoutManager;
 
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.songsFragment);
@@ -41,9 +45,8 @@ public class SongsFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        ArrayList<JSONObject> data = new ArrayList<>();
-        adapter = new Adapter(data);
-        recyclerView.setAdapter(adapter);
+        songsFragmentAdapter = new Adapter(SongAPI.getSongs(getActivity()));
+        recyclerView.setAdapter(songsFragmentAdapter);
     }
 }
 
@@ -71,9 +74,23 @@ class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ImageView songArtwork = (ImageView) holder.songView.findViewById(R.id.songArtwork);
-        TextView songName = (TextView) holder.songView.findViewById(R.id.songName);
+        TextView songTitle = (TextView) holder.songView.findViewById(R.id.songTitle);
         TextView songArtist = (TextView) holder.songView.findViewById(R.id.songArtist);
         TextView songDuration = (TextView) holder.songView.findViewById(R.id.songDuration);
+
+        JSONObject songInfoJSON = data.get(position);
+        Object songInfo = Configuration.defaultConfiguration().jsonProvider().parse(songInfoJSON.toString());
+
+        songTitle.setText((String) JsonPath.read(songInfo, "$.title"));
+        songArtist.setText((String) JsonPath.read(songInfo, "$.artist"));
+        songDuration.setText(formatTime((Integer)JsonPath.read(songInfo, "$.duration")));
+    }
+
+    private String formatTime(Integer second) {
+        Integer minutes = (second % 3600) / 60;
+        Integer seconds = second % 60;
+
+        return String.format("%02d:%02d", minutes, seconds);
     }
 
     @Override

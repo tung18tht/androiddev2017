@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import vn.edu.usth.musicplayer.Model.SongAPI;
 import vn.edu.usth.musicplayer.R;
 
 public class HomeFragment extends Fragment {
@@ -28,8 +27,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        SongAPI.getSongs(getActivity());
 
         PagerAdapter adapter = new HomeFragmentPagerAdapter(getChildFragmentManager());
         ViewPager pager = (ViewPager) getActivity().findViewById(R.id.pager);
