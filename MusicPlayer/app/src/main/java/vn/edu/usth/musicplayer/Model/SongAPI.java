@@ -67,7 +67,20 @@ public class SongAPI {
         Response.Listener<JSONObject> songInfoRequestListener = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                songs.add(response);
+                Object document = Configuration.defaultConfiguration().jsonProvider().parse(response.toString());
+                JSONObject songInfoObject = new JSONObject();
+
+                try {
+                    songInfoObject.put("title", JsonPath.read(document, "$.title"));
+                    songInfoObject.put("artist", JsonPath.read(document, "$.artist"));
+                    songInfoObject.put("duration", JsonPath.read(document, "$.duration"));
+                    songInfoObject.put("artwork", JsonPath.read(document, "http://image.mp3.zdn.vn//thumb/240_240/" + "$.thumbnail"));
+                    songInfoObject.put("source", JsonPath.read(document, "$.source.128"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                songs.add(songInfoObject);
             }
         };
 
