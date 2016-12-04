@@ -1,11 +1,15 @@
 package vn.edu.usth.musicplayer;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.IBinder;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -13,25 +17,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
-import vn.edu.usth.musicplayer.Model.Playlist;
-import vn.edu.usth.musicplayer.Model.SongItem;
-import vn.edu.usth.musicplayer.fragment.DownloadFragment;
-import vn.edu.usth.musicplayer.fragment.HomeFragment;
-import vn.edu.usth.musicplayer.fragment.PlayingFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import vn.edu.usth.musicplayer.Model.Playlist;
+import vn.edu.usth.musicplayer.Model.SongItem;
+import vn.edu.usth.musicplayer.fragment.DownloadFragment;
+import vn.edu.usth.musicplayer.fragment.HomeFragment;
+import vn.edu.usth.musicplayer.fragment.PlayingFragment;
+
 public class MainActivity extends AppCompatActivity {
     Playlist playlist;
     int index = 0;
     MediaPlayer player;
     boolean isPlaying = false;
+    boolean isRepeating = false;
 
 
     @Override
@@ -86,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         Log.i("status", "Main Activity created");
+
     }
 
     private void loadFragment(Fragment frag) {
@@ -94,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
             Bundle data = new Bundle();
             data.putString("currentSongURL", getCurrentSong().getUrl());
             data.putInt("currentPos", player.getCurrentPosition());
+            data.putBoolean("isPlaying", isPlaying);
+            data.putBoolean("isRepeating", isRepeating);
             frag.setArguments(data);
         }
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -187,6 +197,11 @@ public class MainActivity extends AppCompatActivity {
             player.start();
     }
 
+    public void onRepeatClick(View view) {
+        isRepeating = !isRepeating;
+        player.setLooping(isRepeating);
+    }
+
     public void progressAdvance(int pos) {
         player.seekTo(pos);
     }
@@ -222,6 +237,8 @@ public class MainActivity extends AppCompatActivity {
     private SongItem getCurrentSong() {
         return playlist.getSong(index);
     }
+
+
 
 //    public boolean isPlaying(){return isPlaying;}
 
@@ -259,18 +276,3 @@ public class MainActivity extends AppCompatActivity {
         Log.i("status", "Main Activity destroyed");
     }
 }
-
-//class myAsyncTask extends AsyncTask<Void, Void, Void>{
-//
-//    @Override
-//    protected Void doInBackground(Void... voids) {
-//        try {
-//            synchronized (this) {
-//                wait(500);
-//            }
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-//}

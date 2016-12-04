@@ -1,14 +1,17 @@
 package vn.edu.usth.musicplayer.fragment;
 
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -16,6 +19,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.io.File;
+import java.util.Locale;
 
 import vn.edu.usth.musicplayer.MainActivity;
 import vn.edu.usth.musicplayer.Model.Playlist;
@@ -36,6 +40,7 @@ public class PlayingFragment extends Fragment {
     TextView album;
     TextView artist;
     TextView trackLength;
+    ImageButton imgPlay;
     SeekBar prog;
     @Nullable
     @Override
@@ -46,8 +51,15 @@ public class PlayingFragment extends Fragment {
         File file = new File(si_url);
         si = new SongItem(file);
         final MainActivity parent_activity = (MainActivity)getActivity();
-
         final View view = inflater.inflate(R.layout.fragment_playing, container, false);
+
+        imgPlay = (ImageButton) view.findViewById(R.id.imgPlay);
+        if (data.getBoolean("isPlaying")){
+            imgPlay.setImageResource(R.drawable.ic_play);
+        }
+        else {
+            imgPlay.setImageResource(R.drawable.ic_pause);
+        }
         albumArt = (ImageView) view.findViewById(R.id.albumImage);
         albumArt.setImageDrawable(si.getArt());
         title = (TextView) view.findViewById(R.id.title);
@@ -87,9 +99,6 @@ public class PlayingFragment extends Fragment {
         return view;
     }
 
-    private void update(){
-
-    }
     public void updateCurrentPos(View view, int pos){
         TextView current_pos = (TextView) view.findViewById(R.id.current_pos);
         current_pos.setText(durationToLength(pos));
@@ -100,7 +109,7 @@ public class PlayingFragment extends Fragment {
     private String durationToLength(String duration){
         long d = Long.parseLong(duration)/1000;
         if(d>3600) {
-            return String.format("%01d:%02d:%02d", d/3600, (d/60)%60, d%60);
+            return String.format(Locale.FRANCE,"%01d:%02d:%02d", d/3600, (d/60)%60, d%60);
         }else {
             return String.format("%02d:%02d", (d/60)%60, d%60);
         }
