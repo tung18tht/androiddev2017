@@ -28,4 +28,5 @@ dependencies {
     compile 'com.android.support:percent:25.0.0'
     compile 'com.roughike:bottom-bar:2.0.2'
     compile 'com.android.volley:volley:1.0.0'
+    compile 'com.jayway.jsonpath:json-path:2.2.0'
 }

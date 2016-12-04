@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import org.json.JSONObject;
@@ -64,13 +65,15 @@ class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RelativeLayout v = (RelativeLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.view_song, parent, false);
-
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        ImageView songArtwork = (ImageView) holder.songView.findViewById(R.id.songArtwork);
         TextView songName = (TextView) holder.songView.findViewById(R.id.songName);
+        TextView songArtist = (TextView) holder.songView.findViewById(R.id.songArtist);
+        TextView songDuration = (TextView) holder.songView.findViewById(R.id.songDuration);
     }
 
     @Override

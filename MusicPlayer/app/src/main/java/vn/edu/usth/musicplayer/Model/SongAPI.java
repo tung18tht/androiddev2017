@@ -1,8 +1,10 @@
 package vn.edu.usth.musicplayer.Model;
 
 import android.content.Context;
+import android.util.Log;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.jayway.jsonpath.JsonPath;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -37,8 +39,9 @@ public class SongAPI {
         Response.Listener<JSONObject> songIDRequestListener = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                String songID;
-                getMP3ZingSongInfo(songID);
+                String songID = JsonPath.read(response, "$[0]");
+                Log.i("songAPI", "SongId: " + songID);
+//                getMP3ZingSongInfo(songID);
             }
         };
 
