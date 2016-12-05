@@ -55,17 +55,17 @@ public class MainActivity extends AppCompatActivity {
             public void onTabSelected(@IdRes int tabId) {
                 switch (tabId) {
                     case R.id.tab_home:
-                        loadFragment(new SongsFragment());
+                        loadFragment(new SongsFragment(), 1);
                         currentFrag = 0;
                         break;
 
                     case R.id.tab_playing:
-                        loadFragment(new PlayingFragment());
+                        loadFragment(new PlayingFragment(), 1);
                         currentFrag = 1;
                         break;
 
                     case R.id.tab_download:
-                        loadFragment(new DownloadFragment());
+                        loadFragment(new DownloadFragment(), 1);
                         currentFrag = 2;
                         break;
                 }
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void loadFragment(Fragment frag) {
+    private void loadFragment(Fragment frag, int animation) {
         if (frag instanceof PlayingFragment) {
             Bundle data = new Bundle();
             data.putString("currentSongURL", getCurrentSong().getUrl());
@@ -116,7 +116,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+
+        switch (animation) {
+            case 0:
+                break;
+            case 1:
+                transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+                break;
+        }
 
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.contentContainer);
         if (fragment == null) {
@@ -130,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void reloadPlayFragment() {
-        loadFragment(new PlayingFragment());
+        loadFragment(new PlayingFragment(), 0);
     }
 
     private boolean copyMusicToSdCard() {
@@ -194,14 +201,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void onNextClick(View v) {
         nextSong();
-        loadFragment(new PlayingFragment());
+        loadFragment(new PlayingFragment(), 0);
         if (isPlaying)
             player.start();
     }
 
     public void onPrevClick(View v) {
         prevSong();
-        loadFragment(new PlayingFragment());
+        loadFragment(new PlayingFragment(), 0);
         if (isPlaying)
             player.start();
     }
