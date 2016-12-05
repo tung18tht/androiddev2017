@@ -11,6 +11,7 @@ import android.view.*;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.ImageRequest;
@@ -104,6 +105,15 @@ public class SongsFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Log.i("songFragment", "Play song: " + songTitle.getText());
+                }
+            });
+
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    Log.i("songFragment", "Download song: " + songTitle.getText());
+                    Toast.makeText(getActivity(), "Downloading " + songTitle.getText(), Toast.LENGTH_SHORT).show();
+                    return true;
                 }
             });
         }
