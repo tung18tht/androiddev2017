@@ -24,19 +24,41 @@ public class DownloadFragment extends Fragment {
     public DownloadFragment() {
         super();
     }
-    
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_download, container, false);
 
         scanDeviceForMusic();
-        TextView songItem = (TextView)view.findViewById(R.id.songItem1);
 
-        for (int i = 0 ; i < scanDeviceForMusic().size() ; i++){
-            String song1 = scanDeviceForMusic().get(i).toString();
-            songItem.setText(song1);
-        }
+        TextView songItem1 = (TextView)view.findViewById(R.id.songItem1);
+        String song1 = scanDeviceForMusic().get(0).toString();
+        songItem1.setText(song1);
+        TextView artist1 = (TextView)view.findViewById(R.id.artist1);
+        String art1 = scanDeviceForMusic().get(1).toString();
+        artist1.setText(art1);
+
+        TextView songItem2 = (TextView)view.findViewById(R.id.songItem2);
+        String song2 = scanDeviceForMusic().get(2).toString();
+        songItem2.setText(song2);
+        TextView artist2 = (TextView)view.findViewById(R.id.artist2);
+        String art2 = scanDeviceForMusic().get(3).toString();
+        artist2.setText(art2);
+
+        TextView songItem3 = (TextView)view.findViewById(R.id.songItem3);
+        String song3 = scanDeviceForMusic().get(4).toString();
+        songItem3.setText(song3);
+        TextView artist3 = (TextView)view.findViewById(R.id.artist3);
+        String art3 = scanDeviceForMusic().get(5).toString();
+        artist3.setText(art3);
+
+        TextView songItem4 = (TextView)view.findViewById(R.id.songItem4);
+        String song4 = scanDeviceForMusic().get(6).toString();
+        songItem4.setText(song4);
+        TextView artist4 = (TextView)view.findViewById(R.id.artist4);
+        String art4 = scanDeviceForMusic().get(7).toString();
+        artist4.setText(art4);
 
         return view;
     }
@@ -69,6 +91,7 @@ public class DownloadFragment extends Fragment {
                     cursor.moveToNext();
                     if(path != null && path.endsWith(".mp3")) {
                         mp3Files.add(title);
+                        mp3Files.add(artist);
                     }
                 }
 
