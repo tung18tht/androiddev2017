@@ -280,6 +280,13 @@ public class DownloadFragment extends Fragment {
             songDuration.setText(formatTime(downloadedSong.getDuration()));
 
             noDownloadedText.setVisibility(View.GONE);
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.i("downloadFragment", "Play song: " + downloadedSong.getTitle());
+                }
+            });
         }
 
         private String formatTime(String second) {
