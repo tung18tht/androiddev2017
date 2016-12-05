@@ -28,6 +28,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Locale;
 
 public class DownloadFragment extends Fragment {
     static ArrayList<JSONObject> downloading = new ArrayList<JSONObject>();
@@ -290,11 +291,12 @@ public class DownloadFragment extends Fragment {
         }
 
         private String formatTime(String second) {
-            Integer secondInInt = Integer.valueOf(second);
-            Integer minutes = (secondInInt % 3600) / 60;
-            Integer seconds = secondInInt % 60;
-
-            return String.format("%02d:%02d", minutes, seconds);
+            long d = Long.parseLong(second)/1000;
+            if(d>3600) {
+                return String.format(Locale.FRANCE,"%01d:%02d:%02d", d/3600, (d/60)%60, d%60);
+            }else {
+                return String.format("%02d:%02d", (d/60)%60, d%60);
+            }
         }
 
         @Override
