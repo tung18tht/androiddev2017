@@ -20,6 +20,7 @@ import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.JsonPath;
 import org.json.JSONException;
 import org.json.JSONObject;
+import vn.edu.usth.musicplayer.Model.SongItem;
 import vn.edu.usth.musicplayer.R;
 
 import java.io.*;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 
 public class DownloadFragment extends Fragment {
     static ArrayList<JSONObject> downloading = new ArrayList<JSONObject>();
-    static ArrayList<File> downloaded = new ArrayList<File>();
+    static ArrayList<SongItem> downloaded = new ArrayList<SongItem>();
 
     static RecyclerView.Adapter downloadingFragmentAdapter;
     static RecyclerView.Adapter downloadedFragmentAdapter;
@@ -45,55 +46,6 @@ public class DownloadFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_download, container, false);
-    }
-
-    private List<String> scanDeviceForMusic(){
-        String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0";
-        String[] projection = {
-                MediaStore.Audio.Media.TITLE,
-                MediaStore.Audio.Media.ARTIST,
-                MediaStore.Audio.Media.DATA,
-                MediaStore.Audio.Media.DISPLAY_NAME,
-                MediaStore.Audio.Media.DURATION
-        };
-        final String sortOrder = MediaStore.Audio.AudioColumns.TITLE + " COLLATE LOCALIZED ASC";
-        List<String> mp3Files = new ArrayList<>();
-
-        Cursor cursor = null;
-        try {
-            Uri uri = android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-            cursor = getActivity().getContentResolver().query(uri, projection, selection, null, sortOrder);
-            if( cursor != null){
-                cursor.moveToFirst();
-
-                while( !cursor.isAfterLast() ){
-                    String title = cursor.getString(0);
-                    String artist = cursor.getString(1);
-                    String path = cursor.getString(2);
-                    String displayName  = cursor.getString(3);
-                    String songDuration = cursor.getString(4);
-                    cursor.moveToNext();
-                    if(path != null && path.endsWith(".mp3")) {
-                        mp3Files.add(title);
-                        mp3Files.add(artist);
-                    }
-                }
-
-            }
-
-            // print to see list of mp3 files
-            for( String file : mp3Files) {
-                Log.i("TAG", file);
-            }
-
-        } catch (Exception e) {
-            Log.e("TAG", e.toString());
-        }finally{
-            if( cursor != null){
-                cursor.close();
-            }
-        }
-        return mp3Files;
     }
 
     static void download(final JSONObject songDownload, final Context context) {
@@ -262,7 +214,7 @@ public class DownloadFragment extends Fragment {
     }
 
     class DownloadedAdapter extends RecyclerView.Adapter<DownloadedAdapter.ViewHolder> {
-        private ArrayList<File> data;
+        private ArrayList<SongItem> data;
 
         class ViewHolder extends RecyclerView.ViewHolder {
             RelativeLayout songView;
@@ -273,7 +225,7 @@ public class DownloadFragment extends Fragment {
             }
         }
 
-        DownloadedAdapter(ArrayList<File> data) {
+        DownloadedAdapter(ArrayList<SongItem> data) {
             this.data = data;
         }
 
