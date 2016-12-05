@@ -27,6 +27,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 
 public class DownloadFragment extends Fragment {
     static ArrayList<JSONObject> downloading = new ArrayList<JSONObject>();
@@ -137,6 +138,7 @@ public class DownloadFragment extends Fragment {
                 }
 
                 downloadingFragmentAdapter.notifyDataSetChanged();
+                getDownloadedSongs();
             }
         };
 
@@ -151,8 +153,6 @@ public class DownloadFragment extends Fragment {
 
         noDownloadText = (TextView) getActivity().findViewById(R.id.noDownloadText);
         noDownloadedText = (TextView) getActivity().findViewById(R.id.noDownloadedText);
-
-        getDownloadedSongs();
 
         RecyclerView downloadingRecyclerView;
         RecyclerView.LayoutManager downloadingLayoutManager;
@@ -171,18 +171,32 @@ public class DownloadFragment extends Fragment {
         downloadedRecyclerView.setLayoutManager(downloadedLayoutManager);
         downloadedFragmentAdapter = new DownloadedAdapter(downloaded);
         downloadedRecyclerView.setAdapter(downloadedFragmentAdapter);
+
+        getDownloadedSongs();
     }
 
-    private void getDownloadedSongs() {
+    private static void getDownloadedSongs() {
         String[] extensions = {"mp3"};
         Collection<File> mp3Files = FileUtils.listFiles(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), extensions, false);
 
+        downloaded.clear();
         for (File file: mp3Files) {
             SongItem song = new SongItem(file);
-            downloaded.add(song);
-            downloadedPlaylist.addSong(song);
-            downloadedFragmentAdapter.notifyDataSetChanged();
+            if(song.getTitle() != null) {
+                downloaded.add(song);
+            }
         }
+        downloaded.sort(new Comparator<SongItem>() {
+            @Override
+            public int compare(SongItem song1, SongItem song2) {
+                return song1.getTitle().compareTo(song2.getTitle());
+            }
+        });
+
+        for (SongItem song: downloaded) {
+            downloadedPlaylist.addSong(song);
+        }
+        downloadedFragmentAdapter.notifyDataSetChanged();
     }
 
     class DownloadingAdapter extends RecyclerView.Adapter<DownloadingAdapter.ViewHolder> {
@@ -259,6 +273,21 @@ public class DownloadFragment extends Fragment {
             TextView songDuration = (TextView) holder.songView.findViewById(R.id.songDuration);
 
             final SongItem downloadedSong = data.get(position);
+
+            songArtwork.setImageDrawable(downloadedSong.getArt());
+            songTitle.setText(downloadedSong.getTitle());
+            songArtist.setText(downloadedSong.getArtist());
+            songDuration.setText(formatTime(downloadedSong.getDuration()));
+
+            noDownloadedText.setVisibility(View.GONE);
+        }
+
+        private String formatTime(String second) {
+            Integer secondInInt = Integer.valueOf(second);
+            Integer minutes = (secondInInt % 3600) / 60;
+            Integer seconds = secondInInt % 60;
+
+            return String.format("%02d:%02d", minutes, seconds);
         }
 
         @Override

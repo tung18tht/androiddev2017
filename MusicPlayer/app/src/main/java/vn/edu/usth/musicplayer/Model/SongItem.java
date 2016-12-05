@@ -2,7 +2,6 @@ package vn.edu.usth.musicplayer.Model;
 
 import android.graphics.drawable.Drawable;
 import android.media.MediaMetadataRetriever;
-import android.os.Bundle;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -27,8 +26,12 @@ public class SongItem {
         this.url = file.getPath();
         MediaMetadataRetriever mdr  = new MediaMetadataRetriever();
         mdr.setDataSource(url);
-        ByteArrayInputStream bis = new ByteArrayInputStream(mdr.getEmbeddedPicture());
-        this.art = Drawable.createFromStream(bis, "art");
+        try {
+            ByteArrayInputStream bis = new ByteArrayInputStream(mdr.getEmbeddedPicture());
+            this.art = Drawable.createFromStream(bis, "art");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         this.album = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
         this.artist = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
         this.genre = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE);
