@@ -99,21 +99,6 @@ public class SongsFragment extends Fragment {
 
             ImageRequest artworkRequest = new ImageRequest((String) JsonPath.read(songInfo, "$.artwork"), artworkRequestListener, 0, 0, ImageView.ScaleType.CENTER, Bitmap.Config.ARGB_8888, null);
             queue.add(artworkRequest);
-            
-            holder.itemView.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent event) {
-                    switch(event.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
-                            view.setBackgroundColor(getResources().getColor(R.color.whiteOnHold));
-                            break;
-                        case MotionEvent.ACTION_UP:
-                            view.setBackgroundColor(getResources().getColor(R.color.white));
-                            break;
-                    }
-                    return false;
-                }
-            });
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -14,21 +14,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-
 import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
+import vn.edu.usth.musicplayer.Model.Playlist;
+import vn.edu.usth.musicplayer.Model.SongItem;
+import vn.edu.usth.musicplayer.fragment.DownloadFragment;
+import vn.edu.usth.musicplayer.fragment.PlayingFragment;
+import vn.edu.usth.musicplayer.fragment.SongsFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
-import vn.edu.usth.musicplayer.Model.Playlist;
-import vn.edu.usth.musicplayer.Model.SongItem;
-import vn.edu.usth.musicplayer.fragment.DownloadFragment;
-import vn.edu.usth.musicplayer.fragment.HomeFragment;
-import vn.edu.usth.musicplayer.fragment.PlayingFragment;
 
 import static java.lang.Thread.sleep;
 
@@ -50,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         copyMusicToSdCard();
         player = new MediaPlayer();
 
-        loadSong(getCurrentSong());
+//        loadSong(getCurrentSong());
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -58,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTabSelected(@IdRes int tabId) {
                 switch (tabId) {
                     case R.id.tab_home:
-                        loadFragment(new HomeFragment());
+                        loadFragment(new SongsFragment());
                         currentFrag = 0;
                         break;
 
@@ -70,17 +67,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.tab_download:
                         loadFragment(new DownloadFragment());
                         currentFrag = 2;
-                        break;
-                }
-            }
-        });
-
-        bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
-            @Override
-            public void onTabReSelected(@IdRes int tabId) {
-                switch (tabId) {
-                    case R.id.tab_home:
-                        loadFragment(new HomeFragment());
                         break;
                 }
             }
