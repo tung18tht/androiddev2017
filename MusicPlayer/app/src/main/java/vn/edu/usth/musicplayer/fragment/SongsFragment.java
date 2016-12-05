@@ -23,6 +23,8 @@ import vn.edu.usth.musicplayer.R;
 
 import java.util.ArrayList;
 
+import static vn.edu.usth.musicplayer.fragment.DownloadFragment.download;
+
 public class SongsFragment extends Fragment {
     public static RecyclerView.Adapter songsFragmentAdapter;
     static RequestQueue queue;
@@ -84,7 +86,7 @@ public class SongsFragment extends Fragment {
             TextView songDuration = (TextView) holder.songView.findViewById(R.id.songDuration);
 
             JSONObject songInfoJSON = data.get(position);
-            Object songInfo = Configuration.defaultConfiguration().jsonProvider().parse(songInfoJSON.toString());
+            final Object songInfo = Configuration.defaultConfiguration().jsonProvider().parse(songInfoJSON.toString());
 
             songTitle.setText((String) JsonPath.read(songInfo, "$.title"));
             songArtist.setText((String) JsonPath.read(songInfo, "$.artist"));
@@ -112,6 +114,7 @@ public class SongsFragment extends Fragment {
                 @Override
                 public boolean onLongClick(View view) {
                     Log.i("songFragment", "Download song: " + songTitle.getText());
+                    download((String) JsonPath.read(songInfo, "$.sourceDownload"));
                     Toast.makeText(getActivity(), "Downloading " + songTitle.getText(), Toast.LENGTH_SHORT).show();
                     return true;
                 }
