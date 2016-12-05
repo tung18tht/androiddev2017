@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.IdRes;
@@ -14,12 +15,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
 import vn.edu.usth.musicplayer.Model.Playlist;
 import vn.edu.usth.musicplayer.Model.SongItem;
 import vn.edu.usth.musicplayer.fragment.DownloadFragment;
-import vn.edu.usth.musicplayer.fragment.HomeFragment;
 import vn.edu.usth.musicplayer.fragment.PlayingFragment;
 import vn.edu.usth.musicplayer.fragment.SongsFragment;
 
@@ -28,23 +27,27 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static java.lang.Thread.sleep;
+
 public class MainActivity extends AppCompatActivity {
     Playlist playlist;
     int index = 0;
     MediaPlayer player;
     boolean isPlaying = false;
-
+    boolean isRepeating = false;
+    int currentFrag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //create playlist
         playlist = new Playlist("default");
 
         copyMusicToSdCard();
         player = new MediaPlayer();
+
+//        loadSong(getCurrentSong());
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -52,26 +55,18 @@ public class MainActivity extends AppCompatActivity {
             public void onTabSelected(@IdRes int tabId) {
                 switch (tabId) {
                     case R.id.tab_home:
-                        loadFragment(new HomeFragment());
+                        loadFragment(new SongsFragment());
+                        currentFrag = 0;
                         break;
 
                     case R.id.tab_playing:
                         loadFragment(new PlayingFragment());
+                        currentFrag = 1;
                         break;
 
                     case R.id.tab_download:
                         loadFragment(new DownloadFragment());
-                        break;
-                }
-            }
-        });
-
-        bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
-            @Override
-            public void onTabReSelected(@IdRes int tabId) {
-                switch (tabId) {
-                    case R.id.tab_home:
-                        loadFragment(new HomeFragment());
+                        currentFrag = 2;
                         break;
                 }
             }
@@ -79,25 +74,49 @@ public class MainActivity extends AppCompatActivity {
 
         loadSong(getCurrentSong());
 
-        //ListView
-//        String[] music = {"Songs", "Albums", "Artists", "Playlist"};
-//        l = (ListView) findViewById(R.id.listView);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, music);
-//        l.setAdapter(adapter);
+        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                isPlaying = false;
+                if (currentFrag == 1) {
+                    reloadPlayFragment();
+                }
+            }
+        });
 
+        new AsyncTask<Void, Integer, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+
+                while (true) {
+                    if (currentFrag == 1) {
+                        reloadPlayFragment();
+                    }
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }.execute();
 
         Log.i("status", "Main Activity created");
+
     }
 
     private void loadFragment(Fragment frag) {
-
         if (frag instanceof PlayingFragment) {
             Bundle data = new Bundle();
             data.putString("currentSongURL", getCurrentSong().getUrl());
             data.putInt("currentPos", player.getCurrentPosition());
+            data.putBoolean("isPlaying", isPlaying);
+            data.putBoolean("isRepeating", isRepeating);
             frag.setArguments(data);
         }
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
 
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.contentContainer);
         if (fragment == null) {
@@ -108,10 +127,6 @@ public class MainActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
 
         transaction.commit();
-    }
-
-    public void showSongList(View v) {
-        loadFragment(new SongsFragment());
     }
 
     public void reloadPlayFragment() {
@@ -164,7 +179,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    //handler
     public void onPlayClick(View v) {
         ImageButton imgPlay = (ImageButton) v.findViewById(R.id.imgPlay);
         if (isPlaying) {
@@ -192,11 +206,14 @@ public class MainActivity extends AppCompatActivity {
             player.start();
     }
 
+    public void onRepeatClick(View view) {
+        isRepeating = !isRepeating;
+        player.setLooping(isRepeating);
+    }
+
     public void progressAdvance(int pos) {
         player.seekTo(pos);
     }
-
-    //controller method
 
     private void playMusic() {
         player.start();
@@ -227,8 +244,6 @@ public class MainActivity extends AppCompatActivity {
     private SongItem getCurrentSong() {
         return playlist.getSong(index);
     }
-
-//    public boolean isPlaying(){return isPlaying;}
 
     @Override
     protected void onStart() {
@@ -264,18 +279,3 @@ public class MainActivity extends AppCompatActivity {
         Log.i("status", "Main Activity destroyed");
     }
 }
-
-//class myAsyncTask extends AsyncTask<Void, Void, Void>{
-//
-//    @Override
-//    protected Void doInBackground(Void... voids) {
-//        try {
-//            synchronized (this) {
-//                wait(500);
-//            }
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-//}
