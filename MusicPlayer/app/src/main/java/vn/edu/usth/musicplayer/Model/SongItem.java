@@ -6,13 +6,14 @@ import android.os.Bundle;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
  * Created by lam on 11/21/2016.
  */
 
-public class SongItem {
+public class SongItem implements Serializable {
     private String url;
     private Drawable art;
     private String album = "Unknown Album";
@@ -20,6 +21,7 @@ public class SongItem {
     private String genre = "Unknown";
     private String title;
     private String duration;
+    private boolean isStream = false;
 
     public void SongItem(){
 
@@ -55,7 +57,7 @@ public class SongItem {
         this.artist = data.getString("artist");
         this.title = data.getString("title");
         this.duration = Integer.toString(data.getInt("duration"));
-
+        this.isStream = data.getBoolean("isStream");
     }
 
     public String getTitle() {
@@ -73,6 +75,8 @@ public class SongItem {
     public Drawable getArt() {
         return art;
     }
+
+    public boolean isStream() {return isStream;}
 
     public String getAlbum() {
         return album;

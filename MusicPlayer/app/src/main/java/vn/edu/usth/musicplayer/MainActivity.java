@@ -26,6 +26,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import static java.lang.Thread.sleep;
 
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     boolean isPlaying = false;
     boolean isRepeating = false;
     int currentFrag = 0;
+    RedirectTracer tracer = new RedirectTracer(player);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +94,8 @@ public class MainActivity extends AppCompatActivity {
 
                 while (true) {
                     if (currentFrag == 1) {
-                        //reloadPlayFragment();
-                        refreshPlayFragment();
+                        reloadPlayFragment();
+                        //refreshPlayFragment();
                     }
                     try {
                         sleep(1000);
@@ -109,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadFragment(Fragment frag) {
         if (frag instanceof PlayingFragment) {
             Bundle state = new Bundle();
-            state.putString("currentSongURL", getCurrentSong().getUrl());
+            state.putSerializable("currentSong", getCurrentSong());
             state.putInt("currentPos", player.getCurrentPosition());
             state.putBoolean("isPlaying", isPlaying);
             state.putBoolean("isRepeating", isRepeating);
@@ -172,15 +176,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean loadSong(SongItem song) {
-        Uri musicURI = Uri.parse(song.getUrl());
         player.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        Uri musicURI;
         try {
-            player.setDataSource(getApplicationContext(), musicURI);
-            player.prepare();
+            player.reset();
+            if (song.isStream()){
+                tracer.execute(song.getUrl());
+            }
+            else {
+                player.setDataSource(song.getUrl());
+                player.prepare();
+            }
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+            Log.i("music", "Illegal state exception");
         } catch (IOException e) {
             e.printStackTrace();
-            Log.i("music", "Song has failed to load");
-            return false;
         }
         Log.i("music", "Song loaded");
         return true;
@@ -203,14 +214,14 @@ public class MainActivity extends AppCompatActivity {
         nextSong();
         loadFragment(new PlayingFragment());
         if (isPlaying)
-            player.start();
+            playMusic();
     }
 
     public void onPrevClick(View v) {
         prevSong();
         loadFragment(new PlayingFragment());
         if (isPlaying)
-            player.start();
+            playMusic();
     }
 
     public void onRepeatClick(View view) {
@@ -221,7 +232,8 @@ public class MainActivity extends AppCompatActivity {
     public void addSongToPlaylist(SongItem item) {
         playlist.addSong(item);
         index = playlist.getNumOfSong() - 1;
-        //loadSong(getCurrentSong());
+        player.reset();
+        loadSong(getCurrentSong());
     }
 
     public void progressAdvance(int pos) {
@@ -290,5 +302,55 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
 
         Log.i("status", "Main Activity destroyed");
+    }
+}
+
+class RedirectTracer extends AsyncTask<String, Void, String> {
+
+    private MediaPlayer player;
+    private String initialUrl;
+
+    public RedirectTracer(MediaPlayer player){
+        this.player = player;
+    }
+    @Override
+    protected String doInBackground(String... strings) {
+        initialUrl = strings[0];
+        String redirect = null;
+        try {
+            URL url = new URL(initialUrl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            redirect = String.valueOf(conn.getURL());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Log.i("Tracer", "set data source " + redirect);
+
+        return redirect;
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        if(s != null) {
+            Log.i("Tracer", "set data source " + s);
+            try {
+                player.setDataSource(s);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            Log.i("Tracer", "set initial data source " + initialUrl);
+            try {
+                player.setDataSource(initialUrl);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            player.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

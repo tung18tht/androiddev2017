@@ -40,9 +40,7 @@ public class PlayingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         final Bundle data = getArguments();
-        String si_url = data.getString("currentSongURL");
-        File file = new File(si_url);
-        si = new SongItem(file);
+        si = (SongItem) data.getSerializable("currentSong");
         final MainActivity parent_activity = (MainActivity)getActivity();
         final View view = inflater.inflate(R.layout.fragment_playing, container, false);
 

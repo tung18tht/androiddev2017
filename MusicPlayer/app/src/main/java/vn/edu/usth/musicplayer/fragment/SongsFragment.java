@@ -110,7 +110,8 @@ public class SongsFragment extends Fragment {
                 public void onClick(View view) {
                     Log.i("songFragment", "Play song: " + songTitle.getText() + JsonPath.read(songInfo, "$.source"));
                     Bundle data = new Bundle();
-                    data.putString("source",(String) JsonPath.read(songInfo, "$.sourceDownload"));
+                    data.putBoolean("isStream", true);
+                    data.putString("source","$.sourceDownload");
                     data.putInt("duration", (Integer)JsonPath.read(songInfo, "$.duration"));
                     data.putString("title", (String)JsonPath.read(songInfo, "$.title"));
                     data.putString("artist", (String)JsonPath.read(songInfo, "$.artist"));

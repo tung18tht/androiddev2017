@@ -120,6 +120,7 @@ public class SongAPI {
                     songInfoObject.put("duration", JsonPath.read(document, "$.duration"));
                     songInfoObject.put("artwork", "http://image.mp3.zdn.vn//thumb/240_240/" +  JsonPath.read(document, "$.thumbnail"));
                     songInfoObject.put("source", JsonPath.read(document, "$.source.128"));
+                    songInfoObject.put("sourceDownload", JsonPath.read(document, "$.link_download.128"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
