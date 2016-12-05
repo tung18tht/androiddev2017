@@ -7,6 +7,7 @@ import android.content.ServiceConnection;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
@@ -33,13 +34,15 @@ import vn.edu.usth.musicplayer.fragment.DownloadFragment;
 import vn.edu.usth.musicplayer.fragment.HomeFragment;
 import vn.edu.usth.musicplayer.fragment.PlayingFragment;
 
+import static java.lang.Thread.sleep;
+
 public class MainActivity extends AppCompatActivity {
     Playlist playlist;
     int index = 0;
     MediaPlayer player;
     boolean isPlaying = false;
     boolean isRepeating = false;
-
+    int currentFrag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,14 +62,17 @@ public class MainActivity extends AppCompatActivity {
                 switch (tabId) {
                     case R.id.tab_home:
                         loadFragment(new HomeFragment());
+                        currentFrag = 0;
                         break;
 
                     case R.id.tab_playing:
                         loadFragment(new PlayingFragment());
+                        currentFrag = 1;
                         break;
 
                     case R.id.tab_download:
                         loadFragment(new DownloadFragment());
+                        currentFrag = 2;
                         break;
                 }
             }
@@ -91,6 +97,32 @@ public class MainActivity extends AppCompatActivity {
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, music);
 //        l.setAdapter(adapter);
 
+        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                isPlaying = false;
+                if(currentFrag == 1){
+                    reloadPlayFragment();
+                }
+            }
+        });
+
+        new AsyncTask<Void, Integer, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+
+                while(true) {
+                    if(currentFrag == 1) {
+                        reloadPlayFragment();
+                    }
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }.execute();
 
         Log.i("status", "Main Activity created");
 

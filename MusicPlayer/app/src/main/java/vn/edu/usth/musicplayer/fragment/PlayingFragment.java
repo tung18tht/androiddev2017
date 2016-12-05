@@ -35,6 +35,7 @@ public class PlayingFragment extends Fragment {
 //        this.si = si;
 //    }
 
+
     ImageView albumArt;
     TextView title;
     TextView album;
@@ -55,10 +56,10 @@ public class PlayingFragment extends Fragment {
 
         imgPlay = (ImageButton) view.findViewById(R.id.imgPlay);
         if (data.getBoolean("isPlaying")){
-            imgPlay.setImageResource(R.drawable.ic_play);
+            imgPlay.setImageResource(R.drawable.ic_pause);
         }
         else {
-            imgPlay.setImageResource(R.drawable.ic_pause);
+            imgPlay.setImageResource(R.drawable.ic_play);
         }
         albumArt = (ImageView) view.findViewById(R.id.albumImage);
         albumArt.setImageDrawable(si.getArt());
@@ -96,6 +97,7 @@ public class PlayingFragment extends Fragment {
                 view.findViewById(R.id.imgPlay).callOnClick();
             }
         });
+
         return view;
     }
 
