@@ -124,7 +124,7 @@ public class SongsFragment extends Fragment {
                         e.printStackTrace();
                     }
 
-                    download(songDownload);
+                    download(songDownload, getActivity());
                     Toast.makeText(getActivity(), "Downloading " + songTitle.getText(), Toast.LENGTH_SHORT).show();
                     return true;
                 }
