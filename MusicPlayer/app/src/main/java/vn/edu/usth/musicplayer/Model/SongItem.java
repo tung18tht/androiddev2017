@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.util.HashMap;
 
 /**
  * Created by lam on 11/21/2016.
@@ -14,9 +15,9 @@ import java.io.File;
 public class SongItem {
     private String url;
     private Drawable art;
-    private String album;
-    private String artist;
-    private String genre;
+    private String album = "Unknown Album";
+    private String artist = "VA";
+    private String genre = "Unknown";
     private String title;
     private String duration;
 
@@ -34,7 +35,26 @@ public class SongItem {
         this.genre = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE);
         this.title = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
         this.duration = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+    }
 
+    public SongItem(String fileUrl) {
+        this.url = fileUrl;
+        MediaMetadataRetriever mdr  = new MediaMetadataRetriever();
+        mdr.setDataSource(url, new HashMap<String, String>());
+        //ByteArrayInputStream bis = new ByteArrayInputStream(mdr.getEmbeddedPicture());
+        //this.art = Drawable.createFromStream(bis, "art");
+        this.album = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
+        this.artist = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+        this.genre = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE);
+        this.title = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+        this.duration = mdr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+    }
+
+    public SongItem(Bundle data) {
+        this.url = data.getString("source");
+        this.artist = data.getString("artist");
+        this.title = data.getString("title");
+        this.duration = Integer.toString(data.getInt("duration"));
 
     }
 

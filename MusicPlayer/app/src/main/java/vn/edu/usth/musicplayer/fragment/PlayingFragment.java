@@ -3,6 +3,7 @@ package vn.edu.usth.musicplayer.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,7 +93,13 @@ public class PlayingFragment extends Fragment {
         return view;
     }
 
-    public void updateCurrentPos(View view, int pos){
+    public void updateUI(Bundle state){
+        View view = getView();
+        updateCurrentPos(view, state.getInt("current_pos"));
+        Log.i("update", "Current Position: "+state.getInt("current_pos"));
+    }
+
+    private void updateCurrentPos(View view, int pos){
         TextView current_pos = (TextView) view.findViewById(R.id.current_pos);
         current_pos.setText(durationToLength(pos));
         SeekBar prog = (SeekBar) view.findViewById(R.id.prog_bar);

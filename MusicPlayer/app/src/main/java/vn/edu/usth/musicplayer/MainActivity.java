@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCompletion(MediaPlayer mediaPlayer) {
                 isPlaying = false;
                 if (currentFrag == 1) {
-                    reloadPlayFragment();
+                    //reloadPlayFragment();
                 }
             }
         });
@@ -90,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
                 while (true) {
                     if (currentFrag == 1) {
-                        reloadPlayFragment();
+                        //reloadPlayFragment();
+                        refreshPlayFragment();
                     }
                     try {
                         sleep(1000);
@@ -107,12 +108,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadFragment(Fragment frag) {
         if (frag instanceof PlayingFragment) {
-            Bundle data = new Bundle();
-            data.putString("currentSongURL", getCurrentSong().getUrl());
-            data.putInt("currentPos", player.getCurrentPosition());
-            data.putBoolean("isPlaying", isPlaying);
-            data.putBoolean("isRepeating", isRepeating);
-            frag.setArguments(data);
+            Bundle state = new Bundle();
+            state.putString("currentSongURL", getCurrentSong().getUrl());
+            state.putInt("currentPos", player.getCurrentPosition());
+            state.putBoolean("isPlaying", isPlaying);
+            state.putBoolean("isRepeating", isRepeating);
+            frag.setArguments(state);
         }
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -131,6 +132,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void reloadPlayFragment() {
         loadFragment(new PlayingFragment());
+    }
+    public void refreshPlayFragment() {
+        Fragment frag = this.getSupportFragmentManager().findFragmentById(R.id.playingFragment);
+        Bundle state = new Bundle();
+        state.putInt("current_pos", player.getCurrentPosition());
+        ((PlayingFragment) frag).updateUI(state);
     }
 
     private boolean copyMusicToSdCard() {
@@ -209,6 +216,12 @@ public class MainActivity extends AppCompatActivity {
     public void onRepeatClick(View view) {
         isRepeating = !isRepeating;
         player.setLooping(isRepeating);
+    }
+
+    public void addSongToPlaylist(SongItem item) {
+        playlist.addSong(item);
+        index = playlist.getNumOfSong() - 1;
+        //loadSong(getCurrentSong());
     }
 
     public void progressAdvance(int pos) {

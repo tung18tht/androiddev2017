@@ -18,9 +18,13 @@ import com.android.volley.toolbox.ImageRequest;
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.JsonPath;
 import org.json.JSONObject;
+
+import vn.edu.usth.musicplayer.MainActivity;
 import vn.edu.usth.musicplayer.Model.SongAPI;
+import vn.edu.usth.musicplayer.Model.SongItem;
 import vn.edu.usth.musicplayer.R;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class SongsFragment extends Fragment {
@@ -84,7 +88,7 @@ public class SongsFragment extends Fragment {
             TextView songDuration = (TextView) holder.songView.findViewById(R.id.songDuration);
 
             JSONObject songInfoJSON = data.get(position);
-            Object songInfo = Configuration.defaultConfiguration().jsonProvider().parse(songInfoJSON.toString());
+            final Object songInfo = Configuration.defaultConfiguration().jsonProvider().parse(songInfoJSON.toString());
 
             songTitle.setText((String) JsonPath.read(songInfo, "$.title"));
             songArtist.setText((String) JsonPath.read(songInfo, "$.artist"));
@@ -104,7 +108,16 @@ public class SongsFragment extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.i("songFragment", "Play song: " + songTitle.getText());
+                    Log.i("songFragment", "Play song: " + songTitle.getText() + JsonPath.read(songInfo, "$.source"));
+                    Bundle data = new Bundle();
+                    data.putString("source",(String) JsonPath.read(songInfo, "$.sourceDownload"));
+                    data.putInt("duration", (Integer)JsonPath.read(songInfo, "$.duration"));
+                    data.putString("title", (String)JsonPath.read(songInfo, "$.title"));
+                    data.putString("artist", (String)JsonPath.read(songInfo, "$.artist"));
+                    //put Artwork drawable
+                    SongItem item = new SongItem(data);
+                    MainActivity activity = (MainActivity) getActivity();
+                    activity.addSongToPlaylist(item);
                 }
             });
 
