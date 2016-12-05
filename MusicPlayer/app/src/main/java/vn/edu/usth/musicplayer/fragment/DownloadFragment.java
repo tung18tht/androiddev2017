@@ -30,6 +30,9 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Locale;
 
+import static vn.edu.usth.musicplayer.MainActivity.downloadTab;
+import static vn.edu.usth.musicplayer.MainActivity.downloadingSongs;
+
 public class DownloadFragment extends Fragment {
     static ArrayList<JSONObject> downloading = new ArrayList<JSONObject>();
     static ArrayList<SongItem> downloaded = new ArrayList<SongItem>();
@@ -137,6 +140,8 @@ public class DownloadFragment extends Fragment {
                 if (downloading.isEmpty()) {
                     noDownloadText.setVisibility(View.VISIBLE);
                 }
+
+                downloadTab.setBadgeCount(--downloadingSongs);
 
                 downloadingFragmentAdapter.notifyDataSetChanged();
                 getDownloadedSongs();

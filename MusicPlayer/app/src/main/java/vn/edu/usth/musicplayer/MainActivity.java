@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabSelectListener;
 import vn.edu.usth.musicplayer.Model.Playlist;
 import vn.edu.usth.musicplayer.Model.SongItem;
@@ -37,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     boolean isRepeating = false;
     int currentFrag = 0;
 
+    public static int downloadingSongs = 0;
+    public static BottomBarTab downloadTab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        loadSong(getCurrentSong());
 
+        downloadTab = (BottomBarTab) findViewById(R.id.tab_download);
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override

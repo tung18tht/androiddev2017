@@ -13,5 +13,6 @@
             id="@+id/tab_download"
             icon="@drawable/ic_bottom_download"
             title="@string/download"
-            barColorWhenSelected="@color/downloadColor"/>
+            barColorWhenSelected="@color/downloadColor"
+            badgeBackgroundColor="#DD0000"/>
 </tabs>
