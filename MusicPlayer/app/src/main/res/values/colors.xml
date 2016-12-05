@@ -7,6 +7,7 @@
     <color name="homeColor">#795548</color>
 
     <color name="playingColor">#673AB7</color>
+    <color name="playingDarkColor">#471A97</color>
     <color name="accentPlayingColor">#69F0AE</color>>
     <color name="accentDarkPlayingColor">#00C853</color>
 
