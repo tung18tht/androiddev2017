@@ -1,9 +1,13 @@
 package vn.edu.usth.musicplayer.fragment;
 
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +16,7 @@ import android.widget.TextView;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import vn.edu.usth.musicplayer.R;
 
@@ -25,70 +30,62 @@ public class DownloadFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_download, container, false);
 
-        TextView myTextView = (TextView)view.findViewById(R.id.songItem1);
+        scanDeviceForMpFiles();
+        TextView songItem = (TextView)view.findViewById(R.id.songItem1);
 
-        getPlayList();
+        for (int i = 0 ; i < scanDeviceForMpFiles().size() ; i++){
+            String song1 = scanDeviceForMpFiles().get(i).toString();
+            songItem.setText(song1);
+        }
 
-//        String[] stockArr = new String[getPlayList().size()];
-//        stockArr = getPlayList().toArray(stockArr);
-//
-//        int arraySize = getPlayList().size();
-//        for(int i = 0; i < arraySize; i++) {
-//            myTextView.append(stockArr[i]);
-//        }
         return view;
     }
 
-    final String MEDIA_PATH = Environment.getExternalStorageDirectory()
-            .getPath() + "/";
-    private ArrayList<HashMap<String, String>> songsList = new ArrayList<HashMap<String, String>>();
-    private String mp3Pattern = ".mp3";
+    private List<String> scanDeviceForMpFiles(){
+        String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0";
+        String[] projection = {
+                MediaStore.Audio.Media.TITLE,
+                MediaStore.Audio.Media.ARTIST,
+                MediaStore.Audio.Media.DATA,
+                MediaStore.Audio.Media.DISPLAY_NAME,
+                MediaStore.Audio.Media.DURATION
+        };
+        final String sortOrder = MediaStore.Audio.AudioColumns.TITLE + " COLLATE LOCALIZED ASC";
+        List<String> mp3Files = new ArrayList<>();
 
-    public ArrayList<HashMap<String, String>> getPlayList() {
-        System.out.println(MEDIA_PATH);
-        if (MEDIA_PATH != null) {
-            File home = new File(MEDIA_PATH);
-            File[] listFiles = home.listFiles();
-            if (listFiles != null && listFiles.length > 0) {
-                for (File file : listFiles) {
-                    System.out.println(file.getAbsolutePath());
-                    if (file.isDirectory()) {
-                        scanDirectory(file);
-                    } else {
-                        addSongToList(file);
+        Cursor cursor = null;
+        try {
+            Uri uri = android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+            cursor = getActivity().getContentResolver().query(uri, projection, selection, null, sortOrder);
+            if( cursor != null){
+                cursor.moveToFirst();
+
+                while( !cursor.isAfterLast() ){
+                    String title = cursor.getString(0);
+                    String artist = cursor.getString(1);
+                    String path = cursor.getString(2);
+                    String displayName  = cursor.getString(3);
+                    String songDuration = cursor.getString(4);
+                    cursor.moveToNext();
+                    if(path != null && path.endsWith(".mp3")) {
+                        mp3Files.add(title);
                     }
                 }
+
+            }
+
+            // print to see list of mp3 files
+            for( String file : mp3Files) {
+                Log.i("TAG", file);
+            }
+
+        } catch (Exception e) {
+            Log.e("TAG", e.toString());
+        }finally{
+            if( cursor != null){
+                cursor.close();
             }
         }
-        // return songs list array
-        return songsList;
-    }
-
-    private void scanDirectory(File directory) {
-        if (directory != null) {
-            File[] listFiles = directory.listFiles();
-            if (listFiles != null && listFiles.length > 0) {
-                for (File file : listFiles) {
-                    if (file.isDirectory()) {
-                        scanDirectory(file);
-                    } else {
-                        addSongToList(file);
-                    }
-
-                }
-            }
-        }
-    }
-
-    private void addSongToList(File song) {
-        if (song.getName().endsWith(mp3Pattern)) {
-            HashMap<String, String> songMap = new HashMap<String, String>();
-            songMap.put("songTitle",
-                    song.getName().substring(0, (song.getName().length() - 4)));
-            songMap.put("songPath", song.getPath());
-
-            // Adding each song to SongList
-            songsList.add(songMap);
-        }
+        return mp3Files;
     }
 }
