@@ -30,18 +30,18 @@ public class DownloadFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_download, container, false);
 
-        scanDeviceForMpFiles();
+        scanDeviceForMusic();
         TextView songItem = (TextView)view.findViewById(R.id.songItem1);
 
-        for (int i = 0 ; i < scanDeviceForMpFiles().size() ; i++){
-            String song1 = scanDeviceForMpFiles().get(i).toString();
+        for (int i = 0 ; i < scanDeviceForMusic().size() ; i++){
+            String song1 = scanDeviceForMusic().get(i).toString();
             songItem.setText(song1);
         }
 
         return view;
     }
 
-    private List<String> scanDeviceForMpFiles(){
+    private List<String> scanDeviceForMusic(){
         String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0";
         String[] projection = {
                 MediaStore.Audio.Media.TITLE,
