@@ -12,14 +12,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.JsonPath;
+import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import vn.edu.usth.musicplayer.Model.Playlist;
 import vn.edu.usth.musicplayer.Model.SongItem;
 import vn.edu.usth.musicplayer.R;
 
@@ -27,10 +26,13 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class DownloadFragment extends Fragment {
     static ArrayList<JSONObject> downloading = new ArrayList<JSONObject>();
     static ArrayList<SongItem> downloaded = new ArrayList<SongItem>();
+
+    static Playlist downloadedPlaylist = new Playlist("downloaded");
 
     static RecyclerView.Adapter downloadingFragmentAdapter;
     static RecyclerView.Adapter downloadedFragmentAdapter;
@@ -150,6 +152,8 @@ public class DownloadFragment extends Fragment {
         noDownloadText = (TextView) getActivity().findViewById(R.id.noDownloadText);
         noDownloadedText = (TextView) getActivity().findViewById(R.id.noDownloadedText);
 
+        getDownloadedSongs();
+
         RecyclerView downloadingRecyclerView;
         RecyclerView.LayoutManager downloadingLayoutManager;
         downloadingRecyclerView = (RecyclerView) getActivity().findViewById(R.id.downloadingView);
@@ -167,6 +171,18 @@ public class DownloadFragment extends Fragment {
         downloadedRecyclerView.setLayoutManager(downloadedLayoutManager);
         downloadedFragmentAdapter = new DownloadedAdapter(downloaded);
         downloadedRecyclerView.setAdapter(downloadedFragmentAdapter);
+    }
+
+    private void getDownloadedSongs() {
+        String[] extensions = {"mp3"};
+        Collection<File> mp3Files = FileUtils.listFiles(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), extensions, false);
+
+        for (File file: mp3Files) {
+            SongItem song = new SongItem(file);
+            downloaded.add(song);
+            downloadedPlaylist.addSong(song);
+            downloadedFragmentAdapter.notifyDataSetChanged();
+        }
     }
 
     class DownloadingAdapter extends RecyclerView.Adapter<DownloadingAdapter.ViewHolder> {
@@ -237,7 +253,12 @@ public class DownloadFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(final DownloadedAdapter.ViewHolder holder, final int position) {
-            
+            ImageView songArtwork = (ImageView) holder.songView.findViewById(R.id.songArtwork);
+            TextView songTitle = (TextView) holder.songView.findViewById(R.id.songTitle);
+            TextView songArtist = (TextView) holder.songView.findViewById(R.id.songArtist);
+            TextView songDuration = (TextView) holder.songView.findViewById(R.id.songDuration);
+
+            final SongItem downloadedSong = data.get(position);
         }
 
         @Override
