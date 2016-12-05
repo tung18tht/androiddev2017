@@ -123,6 +123,12 @@ public class MainActivity extends AppCompatActivity {
             case 1:
                 transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
                 break;
+            case 2:
+                transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                break;
+            case 3:
+                transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
         }
 
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.contentContainer);
