@@ -29,8 +29,13 @@ import java.util.ArrayList;
 
 public class DownloadFragment extends Fragment {
     static ArrayList<JSONObject> downloading = new ArrayList<JSONObject>();
+    static ArrayList<File> downloaded = new ArrayList<File>();
+
     static RecyclerView.Adapter downloadingFragmentAdapter;
+    static RecyclerView.Adapter downloadedFragmentAdapter;
+
     static TextView noDownloadText;
+    static TextView noDownloadedText;
 
     public DownloadFragment() {
         super();
@@ -142,18 +147,25 @@ public class DownloadFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         noDownloadText = (TextView) getActivity().findViewById(R.id.noDownloadText);
+        noDownloadedText = (TextView) getActivity().findViewById(R.id.noDownloadedText);
 
         RecyclerView downloadingRecyclerView;
         RecyclerView.LayoutManager downloadingLayoutManager;
-
         downloadingRecyclerView = (RecyclerView) getActivity().findViewById(R.id.downloadingView);
         downloadingRecyclerView.setHasFixedSize(true);
-
         downloadingLayoutManager = new LinearLayoutManager(getActivity());
         downloadingRecyclerView.setLayoutManager(downloadingLayoutManager);
-
         downloadingFragmentAdapter = new DownloadingAdapter(downloading);
         downloadingRecyclerView.setAdapter(downloadingFragmentAdapter);
+
+        RecyclerView downloadedRecyclerView;
+        RecyclerView.LayoutManager downloadedLayoutManager;
+        downloadedRecyclerView = (RecyclerView) getActivity().findViewById(R.id.downloadedView);
+        downloadedRecyclerView.setHasFixedSize(true);
+        downloadedLayoutManager = new LinearLayoutManager(getActivity());
+        downloadedRecyclerView.setLayoutManager(downloadedLayoutManager);
+        downloadedFragmentAdapter = new DownloadedAdapter(downloaded);
+        downloadedRecyclerView.setAdapter(downloadedFragmentAdapter);
     }
 
     class DownloadingAdapter extends RecyclerView.Adapter<DownloadingAdapter.ViewHolder> {
@@ -192,6 +204,39 @@ public class DownloadFragment extends Fragment {
             String progress = String.valueOf(JsonPath.read(downloadingInfo, "$.progress"));
             downloadingPercent.setText(progress + "%");
             downloadingProgress.setProgress(Integer.valueOf(progress));
+        }
+
+        @Override
+        public int getItemCount() {
+            return data.size();
+        }
+    }
+
+    class DownloadedAdapter extends RecyclerView.Adapter<DownloadedAdapter.ViewHolder> {
+        private ArrayList<File> data;
+
+        class ViewHolder extends RecyclerView.ViewHolder {
+            RelativeLayout songView;
+
+            ViewHolder(RelativeLayout v) {
+                super(v);
+                songView = v;
+            }
+        }
+
+        DownloadedAdapter(ArrayList<File> data) {
+            this.data = data;
+        }
+
+        @Override
+        public DownloadedAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            RelativeLayout v = (RelativeLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.view_song, parent, false);
+            return new DownloadedAdapter.ViewHolder(v);
+        }
+
+        @Override
+        public void onBindViewHolder(final DownloadedAdapter.ViewHolder holder, final int position) {
+            
         }
 
         @Override
