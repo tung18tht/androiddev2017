@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment {
                 case 1:
                     return new SongsFragment();
                 case 2:
-                    return new SongsFragment();
+                    return new ArtistsFragment();
                 default:
                     return new SongsFragment();
             }

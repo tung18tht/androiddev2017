@@ -26,7 +26,6 @@ public class SongsFragment extends Fragment {
     public static RecyclerView.Adapter songsFragmentAdapter;
     static RequestQueue queue;
 
-
     public SongsFragment() {
         super();
     }
