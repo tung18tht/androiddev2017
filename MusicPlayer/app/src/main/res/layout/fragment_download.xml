@@ -1,63 +1,84 @@
-<LinearLayout
+<ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         tools:context="vn.edu.usth.musicplayer.fragment.DownloadFragment"
         android:id="@+id/downloadFragment"
-        android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/downloading"
-            android:textSize="18sp"
-            android:textStyle="normal|bold"
-            android:fontFamily="sans-serif"/>
-
-    <View
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+        android:scrollbars="vertical">
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/downloadColor"/>
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:text="@string/no_downloading"
-            android:textStyle="italic"
-            android:id="@+id/noDownloadText"/>
-
-    <android.support.v7.widget.RecyclerView
-            android:id="@+id/downloadingView"
+            android:layout_height="match_parent"
             android:scrollbars="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-    </android.support.v7.widget.RecyclerView>
+            android:orientation="vertical">
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/downloaded"
-            android:textSize="18sp"
-            android:textStyle="normal|bold"
-            android:fontFamily="sans-serif"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/downloading"
+                android:textSize="18sp"
+                android:textStyle="normal|bold"
+                android:fontFamily="sans-serif"/>
 
-    <View
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/downloadColor"/>
+        <View
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/downloadColor"/>
 
-</LinearLayout>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/no_downloading"
+                android:textStyle="italic"
+                android:id="@+id/noDownloadText"/>
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/downloadingView"
+                android:scrollbars="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/downloaded"
+                android:textSize="18sp"
+                android:textStyle="normal|bold"
+                android:fontFamily="sans-serif"/>
+
+        <View
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/downloadColor"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/no_downloaded"
+                android:textStyle="italic"
+                android:id="@+id/noDownloadedText"/>
+
+        <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/downloadedView"-->
+        <!--android:scrollbars="vertical"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--</android.support.v7.widget.RecyclerView>-->
+
+    </LinearLayout>
+</ScrollView>
