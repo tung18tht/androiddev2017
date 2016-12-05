@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 public class DownloadFragment extends Fragment {
     static ArrayList<JSONObject> downloading = new ArrayList<JSONObject>();
-    static RecyclerView.Adapter downloadFragmentAdapter;
+    static RecyclerView.Adapter downloadingFragmentAdapter;
     static TextView noDownloadText;
 
     public DownloadFragment() {
@@ -49,7 +49,7 @@ public class DownloadFragment extends Fragment {
             e.printStackTrace();
         }
         downloading.add(songDownload);
-        downloadFragmentAdapter.notifyDataSetChanged();
+        downloadingFragmentAdapter.notifyDataSetChanged();
 
         Object downloadingInfo = Configuration.defaultConfiguration().jsonProvider().parse(songDownload.toString());
         final String title = JsonPath.read(downloadingInfo, "$.title");
@@ -112,7 +112,7 @@ public class DownloadFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                downloadFragmentAdapter.notifyDataSetChanged();
+                downloadingFragmentAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -128,7 +128,7 @@ public class DownloadFragment extends Fragment {
                     noDownloadText.setVisibility(View.VISIBLE);
                 }
 
-                downloadFragmentAdapter.notifyDataSetChanged();
+                downloadingFragmentAdapter.notifyDataSetChanged();
             }
         };
 
@@ -143,20 +143,20 @@ public class DownloadFragment extends Fragment {
 
         noDownloadText = (TextView) getActivity().findViewById(R.id.noDownloadText);
 
-        RecyclerView recyclerView;
-        RecyclerView.LayoutManager layoutManager;
+        RecyclerView downloadingRecyclerView;
+        RecyclerView.LayoutManager downloadingLayoutManager;
 
-        recyclerView = (RecyclerView) getActivity().findViewById(R.id.downloadingView);
-        recyclerView.setHasFixedSize(true);
+        downloadingRecyclerView = (RecyclerView) getActivity().findViewById(R.id.downloadingView);
+        downloadingRecyclerView.setHasFixedSize(true);
 
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
+        downloadingLayoutManager = new LinearLayoutManager(getActivity());
+        downloadingRecyclerView.setLayoutManager(downloadingLayoutManager);
 
-        downloadFragmentAdapter = new Adapter(downloading);
-        recyclerView.setAdapter(downloadFragmentAdapter);
+        downloadingFragmentAdapter = new DownloadingAdapter(downloading);
+        downloadingRecyclerView.setAdapter(downloadingFragmentAdapter);
     }
 
-    class Adapter extends RecyclerView.Adapter<DownloadFragment.Adapter.ViewHolder> {
+    class DownloadingAdapter extends RecyclerView.Adapter<DownloadingAdapter.ViewHolder> {
         private ArrayList<JSONObject> data;
 
         class ViewHolder extends RecyclerView.ViewHolder {
@@ -168,18 +168,18 @@ public class DownloadFragment extends Fragment {
             }
         }
 
-        Adapter(ArrayList<JSONObject> data) {
+        DownloadingAdapter(ArrayList<JSONObject> data) {
             this.data = data;
         }
 
         @Override
-        public DownloadFragment.Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public DownloadingAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             RelativeLayout v = (RelativeLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.view_download, parent, false);
-            return new DownloadFragment.Adapter.ViewHolder(v);
+            return new DownloadingAdapter.ViewHolder(v);
         }
 
         @Override
-        public void onBindViewHolder(final DownloadFragment.Adapter.ViewHolder holder, final int position) {
+        public void onBindViewHolder(final DownloadingAdapter.ViewHolder holder, final int position) {
             TextView downloadingTitle = (TextView) holder.songView.findViewById(R.id.downloadingTitle);
             TextView downloadingPercent = (TextView) holder.songView.findViewById(R.id.downloadingPercent);
             ProgressBar downloadingProgress = (ProgressBar) holder.songView.findViewById(R.id.downloadingProgress);
