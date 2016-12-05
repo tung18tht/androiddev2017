@@ -23,14 +23,43 @@ import static vn.edu.usth.musicplayer.fragment.SongsFragment.songsFragmentAdapte
 public class SongAPI {
     private static com.android.volley.RequestQueue queue;
     private final static String[] songNames = {
-            "Hello",
-            "Grenade",
-            "Everyday",
-            "Greedy",
-            "Moonlight",
-            "It will rain",
-            "Not afraid",
-            "Love the Way You Lie"
+            "Black Beatles",
+            "Closer",
+            "Starboy",
+            "24k Magic",
+            "Side To Side",
+            "Heathens",
+            "Let Me Love You",
+            "Broccoli",
+            "Don't Wanna Know",
+            "Fake Love",
+            "Caroline",
+            "Starving",
+            "I Hate U, I Love U",
+            "Scars To Your Beautiful",
+            "Cold Water",
+            "Treat You Better",
+            "The Greatest",
+            "Unsteady",
+            "Cheap Thrills",
+            "Ooouuu",
+            "Don't Let Me Down",
+            "In The Name Of Love",
+            "Blue Ain’t Your Color",
+            "Bad Things",
+            "This Town",
+            "Chill Bill",
+            "Ride",
+            "All Time Low",
+            "May We All",
+            "Love On The Brain",
+            "Mercy",
+            "X Bitch",
+            "One Dance",
+            "Needed Me",
+            "Party Monster",
+            "Used To This"
+
     };
     private static ArrayList<JSONObject> songs = new ArrayList<>();
 
@@ -51,12 +80,15 @@ public class SongAPI {
         }
     }
 
-    private static void getMP3ZingSongIDAndGetInfo(String songName) {
+    private static void getMP3ZingSongIDAndGetInfo(final String songName) {
         Response.Listener<JSONArray> songIDRequestListener = new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 JSONObject songIDObject = null;
                 try {
+                    if (response == null || response.length() == 0) {
+                        return;
+                    }
                     songIDObject = response.getJSONObject(0);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -64,7 +96,7 @@ public class SongAPI {
                 Object document = Configuration.defaultConfiguration().jsonProvider().parse(songIDObject.toString());
 
                 String songID = JsonPath.read(document, "$.SiteId");
-                Log.i("songAPI", "SongID: " + songID);
+                Log.i("songAPI", "Song: " + songName + " - ID:" + songID);
 
                 getMP3ZingSongInfo(songID);
             }
