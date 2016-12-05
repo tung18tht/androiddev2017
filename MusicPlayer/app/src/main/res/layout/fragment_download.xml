@@ -26,6 +26,15 @@
             android:layout_height="2dp"
             android:background="@color/downloadColor"/>
 
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/no_downloading"
+            android:textStyle="italic"
+            android:id="@+id/noDownloadText"/>
+
     <android.support.v7.widget.RecyclerView
             android:id="@+id/downloadingView"
             android:scrollbars="vertical"

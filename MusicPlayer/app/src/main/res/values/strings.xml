@@ -13,4 +13,6 @@
     <string name="artists">Artists</string>
     <string name="favorites">Favorites</string>
     <string name="playlist">Playlists</string>
+
+    <string name="no_downloading">Nothing downloading yet</string>
 </resources>

@@ -30,6 +30,7 @@ import java.util.ArrayList;
 public class DownloadFragment extends Fragment {
     static ArrayList<JSONObject> downloading = new ArrayList<JSONObject>();
     static RecyclerView.Adapter downloadFragmentAdapter;
+    static TextView noDownloadText;
 
     public DownloadFragment() {
         super();
@@ -104,6 +105,8 @@ public class DownloadFragment extends Fragment {
             protected void onProgressUpdate(Integer... progress) {
                 super.onProgressUpdate(progress);
 
+                noDownloadText.setVisibility(View.GONE);
+
                 try {
                     songDownload.put("progress", progress[0]);
                 } catch (JSONException e) {
@@ -120,6 +123,11 @@ public class DownloadFragment extends Fragment {
                     Toast.makeText(context, "Fail to download " + title, Toast.LENGTH_SHORT).show();
 
                 downloading.remove(songDownload);
+
+                if (downloading.isEmpty()) {
+                    noDownloadText.setVisibility(View.VISIBLE);
+                }
+
                 downloadFragmentAdapter.notifyDataSetChanged();
             }
         };
@@ -132,6 +140,8 @@ public class DownloadFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        noDownloadText = (TextView) getActivity().findViewById(R.id.noDownloadText);
 
         RecyclerView recyclerView;
         RecyclerView.LayoutManager layoutManager;
