@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
+
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;

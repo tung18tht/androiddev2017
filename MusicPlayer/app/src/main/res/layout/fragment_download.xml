@@ -90,13 +90,13 @@
                             android:text="65%"/>
 
                     <ProgressBar
+                            android:id="@+id/progress_bar1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:layout_alignParentBottom="true"
                             android:progressTint="@color/downloadColorDark"
-                            style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
-                            android:progress="65"/>
+                            style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"/>
 
                 </RelativeLayout>
 
