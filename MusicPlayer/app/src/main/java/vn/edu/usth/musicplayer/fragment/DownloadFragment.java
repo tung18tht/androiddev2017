@@ -9,13 +9,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import com.jayway.jsonpath.Configuration;
+import com.jayway.jsonpath.JsonPath;
+import org.json.JSONException;
 import org.json.JSONObject;
 import vn.edu.usth.musicplayer.R;
 
 import java.util.ArrayList;
 
 public class DownloadFragment extends Fragment {
+    static ArrayList<JSONObject> downloading = new ArrayList<JSONObject>();
+    static RecyclerView.Adapter downloadFragmentAdapter;
+
     public DownloadFragment() {
         super();
     }
@@ -26,8 +34,14 @@ public class DownloadFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_download, container, false);
     }
 
-    static void download(String source) {
-        Log.i("downloadFragment", "Download url: " + source);
+    static void download(JSONObject songDownload) {
+        try {
+            songDownload.put("progress", "0");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        downloading.add(songDownload);
+        downloadFragmentAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -43,7 +57,7 @@ public class DownloadFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        RecyclerView.Adapter downloadFragmentAdapter = new DownloadFragment.Adapter(new ArrayList<JSONObject>());
+        downloadFragmentAdapter = new Adapter(downloading);
         recyclerView.setAdapter(downloadFragmentAdapter);
     }
 
@@ -64,12 +78,35 @@ public class DownloadFragment extends Fragment {
 
         @Override
         public DownloadFragment.Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            RelativeLayout v = (RelativeLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.view_song, parent, false);
+            RelativeLayout v = (RelativeLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.view_download, parent, false);
             return new DownloadFragment.Adapter.ViewHolder(v);
         }
 
         @Override
         public void onBindViewHolder(final DownloadFragment.Adapter.ViewHolder holder, int position) {
+            TextView downloadingTitle = (TextView) holder.songView.findViewById(R.id.downloadingTitle);
+            TextView downloadingPercent = (TextView) holder.songView.findViewById(R.id.downloadingPercent);
+            ProgressBar downloadingProgress = (ProgressBar) holder.songView.findViewById(R.id.downloadingProgress);
+
+            JSONObject downloadingInfoJSON = data.get(position);
+            Object downloadingInfo = Configuration.defaultConfiguration().jsonProvider().parse(downloadingInfoJSON.toString());
+
+            downloadingTitle.setText((String) JsonPath.read(downloadingInfo, "$.title"));
+            String progress = JsonPath.read(downloadingInfo, "$.progress");
+            downloadingPercent.setText(progress + "%");
+            downloadingProgress.setProgress(Integer.valueOf(progress));
+
+            String source = JsonPath.read(downloadingInfo, "$.sourceDownload");
+
+//            AsyncTask<String, Integer, File> download = new AsyncTask<String, Integer, File>() {
+//                @Override
+//                protected File doInBackground(String... strings) {
+//                    return null;
+//                }
+//            };
+//
+//            download.execute(sourceDownload);
+            Log.i("downloadFragment", "Download url: " + source);
         }
 
         @Override

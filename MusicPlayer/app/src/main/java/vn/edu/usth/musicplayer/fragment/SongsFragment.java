@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.ImageRequest;
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.JsonPath;
+import org.json.JSONException;
 import org.json.JSONObject;
 import vn.edu.usth.musicplayer.Model.SongAPI;
 import vn.edu.usth.musicplayer.R;
@@ -114,7 +115,16 @@ public class SongsFragment extends Fragment {
                 @Override
                 public boolean onLongClick(View view) {
                     Log.i("songFragment", "Download song: " + songTitle.getText());
-                    download((String) JsonPath.read(songInfo, "$.sourceDownload"));
+
+                    JSONObject songDownload = new JSONObject();
+                    try {
+                        songDownload.put("title", JsonPath.read(songInfo, "$.title"));
+                        songDownload.put("sourceDownload", JsonPath.read(songInfo, "$.sourceDownload"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    download(songDownload);
                     Toast.makeText(getActivity(), "Downloading " + songTitle.getText(), Toast.LENGTH_SHORT).show();
                     return true;
                 }
