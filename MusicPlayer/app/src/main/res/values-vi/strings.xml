@@ -11,4 +11,6 @@
     <string name="songs">Bài hát</string>
     <string name="downloaded">Đã tải</string>
     <string name="downloading">Đang tải</string>
+    <string name="no_downloaded">Chưa tải về</string>
+    <string name="no_downloading">Không có mục đang tải</string>
 </resources>

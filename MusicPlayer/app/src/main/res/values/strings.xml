@@ -15,4 +15,5 @@
     <string name="playlist">Playlists</string>
 
     <string name="no_downloading">Nothing downloading yet</string>
+    <string name="no_downloaded">Nothing downloaded yet</string>
 </resources>
