@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.IdRes;
@@ -13,25 +14,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
-import vn.edu.usth.musicplayer.Model.Playlist;
-import vn.edu.usth.musicplayer.Model.SongItem;
-import vn.edu.usth.musicplayer.fragment.DownloadFragment;
-import vn.edu.usth.musicplayer.fragment.HomeFragment;
-import vn.edu.usth.musicplayer.fragment.PlayingFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import vn.edu.usth.musicplayer.Model.Playlist;
+import vn.edu.usth.musicplayer.Model.SongItem;
+import vn.edu.usth.musicplayer.fragment.DownloadFragment;
+import vn.edu.usth.musicplayer.fragment.HomeFragment;
+import vn.edu.usth.musicplayer.fragment.PlayingFragment;
+
+import static java.lang.Thread.sleep;
+
 public class MainActivity extends AppCompatActivity {
     Playlist playlist;
     int index = 0;
     MediaPlayer player;
     boolean isPlaying = false;
+    boolean isRepeating = false;
+    int currentFrag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +59,17 @@ public class MainActivity extends AppCompatActivity {
                 switch (tabId) {
                     case R.id.tab_home:
                         loadFragment(new HomeFragment());
+                        currentFrag = 0;
                         break;
 
                     case R.id.tab_playing:
                         loadFragment(new PlayingFragment());
+                        currentFrag = 1;
                         break;
 
                     case R.id.tab_download:
                         loadFragment(new DownloadFragment());
+                        currentFrag = 2;
                         break;
                 }
             }
@@ -76,7 +86,37 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        loadSong(getCurrentSong());
+
+        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                isPlaying = false;
+                if (currentFrag == 1) {
+                    reloadPlayFragment();
+                }
+            }
+        });
+
+        new AsyncTask<Void, Integer, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+
+                while (true) {
+                    if (currentFrag == 1) {
+                        reloadPlayFragment();
+                    }
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }.execute();
+
         Log.i("status", "Main Activity created");
+
     }
 
     private void loadFragment(Fragment frag) {
@@ -84,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
             Bundle data = new Bundle();
             data.putString("currentSongURL", getCurrentSong().getUrl());
             data.putInt("currentPos", player.getCurrentPosition());
+            data.putBoolean("isPlaying", isPlaying);
+            data.putBoolean("isRepeating", isRepeating);
             frag.setArguments(data);
         }
 
@@ -99,6 +141,10 @@ public class MainActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
 
         transaction.commit();
+    }
+
+    public void reloadPlayFragment() {
+        loadFragment(new PlayingFragment());
     }
 
     private boolean copyMusicToSdCard() {
@@ -172,6 +218,11 @@ public class MainActivity extends AppCompatActivity {
         loadFragment(new PlayingFragment());
         if (isPlaying)
             player.start();
+    }
+
+    public void onRepeatClick(View view) {
+        isRepeating = !isRepeating;
+        player.setLooping(isRepeating);
     }
 
     public void progressAdvance(int pos) {
