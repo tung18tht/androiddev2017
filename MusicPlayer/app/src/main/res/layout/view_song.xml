@@ -2,7 +2,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-android:background="@color/white">
+        android:background="@color/white">
 
     <ImageView
             android:layout_width="65dp"
@@ -21,14 +21,18 @@ android:background="@color/white">
         <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
+                android:singleLine="true"
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="4dp"
+                android:layout_marginRight="55dp"
                 android:id="@+id/songTitle"
                 android:textSize="24sp"/>
 
         <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
+                android:layout_marginRight="55dp"
+                android:singleLine="true"
                 android:id="@+id/songArtist"
                 android:textSize="18sp"/>
 

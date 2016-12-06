@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.ImageRequest;
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.JsonPath;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import vn.edu.usth.musicplayer.MainActivity;
@@ -26,6 +27,10 @@ import vn.edu.usth.musicplayer.R;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import static vn.edu.usth.musicplayer.MainActivity.downloadTab;
+import static vn.edu.usth.musicplayer.MainActivity.downloadingSongs;
+import static vn.edu.usth.musicplayer.fragment.DownloadFragment.download;
 
 public class SongsFragment extends Fragment {
     public static RecyclerView.Adapter songsFragmentAdapter;
@@ -126,7 +131,18 @@ public class SongsFragment extends Fragment {
                 @Override
                 public boolean onLongClick(View view) {
                     Log.i("songFragment", "Download song: " + songTitle.getText());
+
+                    JSONObject songDownload = new JSONObject();
+                    try {
+                        songDownload.put("title", JsonPath.read(songInfo, "$.title"));
+                        songDownload.put("sourceDownload", JsonPath.read(songInfo, "$.sourceDownload"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    download(songDownload, getActivity());
                     Toast.makeText(getActivity(), "Downloading " + songTitle.getText(), Toast.LENGTH_SHORT).show();
+                    downloadTab.setBadgeCount(++downloadingSongs);
                     return true;
                 }
             });

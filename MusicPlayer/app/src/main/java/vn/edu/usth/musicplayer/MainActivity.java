@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.BottomBarTab;
 import com.roughike.bottombar.OnTabSelectListener;
 import vn.edu.usth.musicplayer.Model.Playlist;
 import vn.edu.usth.musicplayer.Model.SongItem;
@@ -41,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     int currentFrag = 0;
     RedirectTracer tracer = new RedirectTracer(player);
 
+    public static int downloadingSongs = 0;
+    public static BottomBarTab downloadTab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,23 +57,24 @@ public class MainActivity extends AppCompatActivity {
 
 //        loadSong(getCurrentSong());
 
+        downloadTab = (BottomBarTab) findViewById(R.id.tab_download);
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
                 switch (tabId) {
                     case R.id.tab_home:
-                        loadFragment(new SongsFragment());
+                        loadFragment(new SongsFragment(), 1);
                         currentFrag = 0;
                         break;
 
                     case R.id.tab_playing:
-                        loadFragment(new PlayingFragment());
+                        loadFragment(new PlayingFragment(), 1);
                         currentFrag = 1;
                         break;
 
                     case R.id.tab_download:
-                        loadFragment(new DownloadFragment());
+                        loadFragment(new DownloadFragment(), 1);
                         currentFrag = 2;
                         break;
                 }
@@ -110,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void loadFragment(Fragment frag) {
+    private void loadFragment(Fragment frag, int animation) {
         if (frag instanceof PlayingFragment) {
             Bundle state = new Bundle();
             state.putSerializable("currentSong", getCurrentSong());
@@ -121,7 +126,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+
+        switch (animation) {
+            case 0:
+                break;
+            case 1:
+                transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+                break;
+            case 2:
+                transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                break;
+            case 3:
+                transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
+        }
 
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.contentContainer);
         if (fragment == null) {
@@ -135,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void reloadPlayFragment() {
-        loadFragment(new PlayingFragment());
+        loadFragment(new PlayingFragment(), 0);
     }
     public void refreshPlayFragment() {
         Fragment frag = this.getSupportFragmentManager().findFragmentById(R.id.playingFragment);
@@ -212,14 +230,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void onNextClick(View v) {
         nextSong();
-        loadFragment(new PlayingFragment());
+        loadFragment(new PlayingFragment(), 0);
         if (isPlaying)
             playMusic();
     }
 
     public void onPrevClick(View v) {
         prevSong();
-        loadFragment(new PlayingFragment());
+        loadFragment(new PlayingFragment(), 0);
         if (isPlaying)
             playMusic();
     }

@@ -16,7 +16,8 @@
                 android:id="@+id/albumImage"
                 app:layout_widthPercent="100%"
                 app:layout_aspectRatio="100%"
-                android:src="@drawable/album"/>
+                android:src="@drawable/album"
+                android:background="@color/playingDarkColor"/>
     </android.support.percent.PercentRelativeLayout>
 
     <ImageButton
@@ -161,12 +162,12 @@
 
 
             <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#00000000"
-                android:src="@drawable/ic_loop"
-                android:onClick="onRepeatClick"/>
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:src="@drawable/ic_loop"
+                    android:onClick="onRepeatClick"/>
 
         </LinearLayout>
 
