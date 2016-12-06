@@ -34,6 +34,7 @@ import java.util.Locale;
 
 import static vn.edu.usth.musicplayer.MainActivity.downloadTab;
 import static vn.edu.usth.musicplayer.MainActivity.downloadingSongs;
+import static vn.edu.usth.musicplayer.MainActivity.loadFragment;
 
 public class DownloadFragment extends Fragment {
     static ArrayList<JSONObject> downloading = new ArrayList<JSONObject>();
@@ -293,6 +294,7 @@ public class DownloadFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     ((MainActivity)getActivity()).addSongToPlaylist(downloadedSong);
+                    loadFragment(new PlayingFragment(), 2);
                     Log.i("downloadFragment", "Play song: " + downloadedSong.getTitle() + " at " + downloadedSong.getUrl());
                 }
             });

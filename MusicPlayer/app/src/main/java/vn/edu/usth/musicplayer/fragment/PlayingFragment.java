@@ -15,7 +15,6 @@ import vn.edu.usth.musicplayer.MainActivity;
 import vn.edu.usth.musicplayer.Model.SongItem;
 import vn.edu.usth.musicplayer.R;
 
-import java.io.File;
 import java.util.Locale;
 
 public class PlayingFragment extends Fragment {
@@ -35,6 +34,7 @@ public class PlayingFragment extends Fragment {
     TextView trackLength;
     ImageButton imgPlay;
     SeekBar prog;
+    TextView index;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,6 +55,8 @@ public class PlayingFragment extends Fragment {
         albumArt.setImageDrawable(si.getArt());
         title = (TextView) view.findViewById(R.id.title);
         title.setText(si.getTitle());
+        index = (TextView) view.findViewById(R.id.index);
+        index.setText(data.getInt("index") + "/" + data.getInt("length"));
         album = (TextView) view.findViewById(R.id.album);
         album.setText(si.getAlbum());
         artist = (TextView) view.findViewById(R.id.artist);

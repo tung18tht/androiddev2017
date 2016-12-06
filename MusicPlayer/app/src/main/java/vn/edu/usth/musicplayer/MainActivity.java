@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -28,19 +29,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import static java.lang.Thread.sleep;
 
 public class MainActivity extends AppCompatActivity {
-    Playlist playlist;
-    int index = 0;
-    MediaPlayer player;
-    boolean isPlaying = false;
-    boolean isRepeating = false;
-    int currentFrag = 0;
+    static Playlist playlist;
+    static int index = 0;
+    static MediaPlayer player;
+    static boolean isPlaying = false;
+    static boolean isRepeating = false;
+    static int currentFrag = 0;
     RedirectTracer tracer = new RedirectTracer(player);
+    static FragmentManager fm;
 
     public static int downloadingSongs = 0;
     public static BottomBarTab downloadTab;
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        fm = getSupportFragmentManager();
 
         playlist = new Playlist("default");
 
@@ -115,17 +118,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void loadFragment(Fragment frag, int animation) {
+    public static void loadFragment(Fragment frag, int animation) {
         if (frag instanceof PlayingFragment) {
             Bundle state = new Bundle();
             state.putSerializable("currentSong", getCurrentSong());
             state.putInt("currentPos", player.getCurrentPosition());
             state.putBoolean("isPlaying", isPlaying);
             state.putBoolean("isRepeating", isRepeating);
+            state.putInt("index", index+1);
+            state.putInt("length", playlist.getNumOfSong());
             frag.setArguments(state);
         }
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = fm.beginTransaction();
 
         switch (animation) {
             case 0:
@@ -141,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.contentContainer);
+        Fragment fragment = fm.findFragmentById(R.id.contentContainer);
         if (fragment == null) {
             transaction.add(R.id.contentContainer, frag);
         } else {
@@ -258,9 +263,10 @@ public class MainActivity extends AppCompatActivity {
         playlist.addSong(item);
         index = playlist.getNumOfSong() - 1;
         loadSong(getCurrentSong());
-        if (isPlaying){
-            playMusic();
-        }
+        playMusic();
+//        ImageButton imgPlay = (ImageButton) findViewById(R.id.imgPlay);
+        isPlaying = true;
+//        imgPlay.setImageResource(R.drawable.ic_pause);
     }
 
     public void progressAdvance(int pos) {
@@ -293,7 +299,7 @@ public class MainActivity extends AppCompatActivity {
         loadSong(getCurrentSong());
     }
 
-    private SongItem getCurrentSong() {
+    private static SongItem getCurrentSong() {
         return playlist.getSong(index);
     }
 
