@@ -196,6 +196,9 @@ public class MainActivity extends AppCompatActivity {
     private boolean loadSong(SongItem song) {
         player.setAudioStreamType(AudioManager.STREAM_MUSIC);
         Uri musicURI;
+        if(player.isPlaying()){
+            pauseMusic();
+        }
         try {
             player.reset();
             if (song.isStream()){
@@ -203,7 +206,11 @@ public class MainActivity extends AppCompatActivity {
             }
             else {
                 player.setDataSource(song.getUrl());
+            }
+            try {
                 player.prepare();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         } catch (IllegalStateException e) {
             e.printStackTrace();
@@ -217,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onPlayClick(View v) {
         ImageButton imgPlay = (ImageButton) v.findViewById(R.id.imgPlay);
-        if (isPlaying) {
+        if (player.isPlaying()) {
             pauseMusic();
             isPlaying = false;
             imgPlay.setImageResource(R.drawable.ic_play);
@@ -231,14 +238,14 @@ public class MainActivity extends AppCompatActivity {
     public void onNextClick(View v) {
         nextSong();
         loadFragment(new PlayingFragment(), 0);
-        if (isPlaying)
+        if (player.isPlaying())
             playMusic();
     }
 
     public void onPrevClick(View v) {
         prevSong();
         loadFragment(new PlayingFragment(), 0);
-        if (isPlaying)
+        if (player.isPlaying())
             playMusic();
     }
 
@@ -250,8 +257,10 @@ public class MainActivity extends AppCompatActivity {
     public void addSongToPlaylist(SongItem item) {
         playlist.addSong(item);
         index = playlist.getNumOfSong() - 1;
-        player.reset();
         loadSong(getCurrentSong());
+        if (isPlaying){
+            playMusic();
+        }
     }
 
     public void progressAdvance(int pos) {
@@ -364,11 +373,6 @@ class RedirectTracer extends AsyncTask<String, Void, String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        try {
-            player.prepare();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }

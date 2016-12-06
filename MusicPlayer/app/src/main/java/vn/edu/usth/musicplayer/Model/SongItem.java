@@ -2,6 +2,7 @@ package vn.edu.usth.musicplayer.Model;
 
 import android.graphics.drawable.Drawable;
 import android.media.MediaMetadataRetriever;
+import android.os.Bundle;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

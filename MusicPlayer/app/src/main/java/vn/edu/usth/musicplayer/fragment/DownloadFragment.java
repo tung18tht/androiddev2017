@@ -18,6 +18,8 @@ import com.jayway.jsonpath.JsonPath;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import vn.edu.usth.musicplayer.MainActivity;
 import vn.edu.usth.musicplayer.Model.Playlist;
 import vn.edu.usth.musicplayer.Model.SongItem;
 import vn.edu.usth.musicplayer.R;
@@ -290,7 +292,8 @@ public class DownloadFragment extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.i("downloadFragment", "Play song: " + downloadedSong.getTitle());
+                    ((MainActivity)getActivity()).addSongToPlaylist(downloadedSong);
+                    Log.i("downloadFragment", "Play song: " + downloadedSong.getTitle() + " at " + downloadedSong.getUrl());
                 }
             });
         }

@@ -123,7 +123,7 @@ public class SongsFragment extends Fragment {
                     //put Artwork drawable
                     SongItem item = new SongItem(data);
                     MainActivity activity = (MainActivity) getActivity();
-                    activity.addSongToPlaylist(item);
+//                    activity.addSongToPlaylist(item);
                 }
             });
 
